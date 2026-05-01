@@ -29,7 +29,7 @@ export default {
     scheme: 'community-dictionary',
     plugins: ['expo-router'],
     extra: {
-      apiUrl: process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3001',
+      apiUrl: 'http://10.230.209.73:3001',
     },
   },
 };
