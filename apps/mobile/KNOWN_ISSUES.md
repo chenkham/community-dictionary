@@ -1,63 +1,44 @@
-# Known Issues
+# Mobile App - Working! ✅
 
-## Windows + Node.js v24 + Expo CLI Issue
+## Status: FULLY WORKING
 
-### Problem
-Expo CLI has a known bug with Node.js v24 on Windows that causes this error:
-```
-Error: ENOENT: no such file or directory, mkdir '...\node:sea'
-```
+The mobile app is now running successfully using Expo SDK 49!
 
-### Workarounds
+## How to Run
 
-#### Option 1: Use Expo Go Web (Recommended for now)
-The web app works perfectly and is responsive for mobile:
 ```bash
-# From root directory
-cd apps/web
-npm run dev
-# Open http://localhost:3000 on your phone's browser
-```
-
-#### Option 2: Downgrade Node.js
-Install Node.js v20 LTS instead of v24:
-1. Download from https://nodejs.org/
-2. Install Node.js v20.x LTS
-3. Restart terminal
-4. Try `npm start` again
-
-#### Option 3: Use WSL2 (Windows Subsystem for Linux)
-```bash
-# In WSL2
-cd /mnt/c/Users/chenk/community-dictionary/apps/mobile
-npm install
+cd apps/mobile
 npm start
 ```
 
-#### Option 4: Wait for Expo CLI Update
-This is a known issue being tracked by the Expo team. A fix is expected in future releases.
+Then:
+1. Install **Expo Go** app on your phone:
+   - [iOS App Store](https://apps.apple.com/app/expo-go/id982107779)
+   - [Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
 
-### Status
-- ✅ Web app works perfectly (responsive for mobile)
-- ✅ API works perfectly
-- ⚠️ Native mobile app code is complete but blocked by Expo CLI bug
-- 📝 Mobile app will work once Expo CLI is updated or Node.js is downgraded
+2. Scan the QR code with:
+   - **iOS**: Use the Camera app
+   - **Android**: Use the Expo Go app
 
-### Mobile App Code Status
-The mobile app code is **100% complete** and ready to run:
-- ✅ All screens implemented
-- ✅ Navigation configured
-- ✅ API integration done
+3. The app will load on your phone!
+
+## Features
+
+- ✅ Native iOS and Android support
+- ✅ Search across all languages
+- ✅ Word detail screens
+- ✅ Smooth native navigation
 - ✅ TypeScript throughout
-- ✅ Native UI components
-- ⚠️ Just waiting for Expo CLI fix
+- ✅ Connected to API backend
+- ✅ Touch-optimized UI
+- ✅ Native gestures
 
-### Alternative: Use Web App on Mobile
-The web application is fully responsive and works great on mobile browsers:
-- Responsive design
-- Touch-optimized
-- Fast performance
-- Works on all devices
-- No installation needed
+## Solution
 
-Open http://localhost:3000 (or your deployed URL) on any mobile device!
+The issue was with Expo SDK 50 and Node.js v24. We downgraded to Expo SDK 49 which works perfectly!
+
+## Previous Issue (RESOLVED)
+
+~~Expo CLI had a bug with Node.js v24 on Windows~~
+
+**FIXED**: Using Expo SDK 49 instead of 50
