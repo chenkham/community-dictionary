@@ -1,0 +1,19 @@
+{
+  "name": "@community-dictionary/ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared UI components for Community Dictionary",
+  "main": "index.tsx",
+  "types": "index.tsx",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.55",
+    "typescript": "^5.3.3"
+  }
+}

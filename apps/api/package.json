@@ -1,0 +1,24 @@
+{
+  "name": "@community-dictionary/api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend API for Community Dictionary",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.8.2",
+    "@supabase/supabase-js": "^2.39.7",
+    "hono": "^4.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  }
+}

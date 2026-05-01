@@ -1,0 +1,26 @@
+{
+  "name": "@community-dictionary/mobile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mobile application for Community Dictionary",
+  "main": "expo-router/entry",
+  "scripts": {
+    "dev": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@community-dictionary/ui": "*",
+    "expo": "~50.0.0",
+    "expo-router": "~3.4.0",
+    "react": "18.2.0",
+    "react-native": "0.73.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@types/react": "~18.2.55",
+    "typescript": "^5.3.3"
+  }
+}

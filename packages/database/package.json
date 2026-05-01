@@ -1,0 +1,16 @@
+{
+  "name": "@community-dictionary/database",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Database schemas and migrations for Community Dictionary",
+  "main": "index.ts",
+  "scripts": {
+    "generate": "supabase gen types typescript --local > types/database.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
