@@ -16,8 +16,6 @@ Main table storing dictionary entries.
 | english_word | TEXT | English translation |
 | assamese_word | TEXT | Assamese translation |
 | pronunciation | TEXT | Phonetic pronunciation guide |
-| part_of_speech | TEXT | Noun, Verb, Adjective, etc. |
-| example_sentence | TEXT | Example usage in context |
 | audio_url | TEXT | URL to pronunciation audio (optional) |
 | created_at | TIMESTAMP | Record creation time |
 | updated_at | TIMESTAMP | Last update time |
@@ -67,7 +65,7 @@ The schema includes RLS policies for security:
 
 1. Prepare your CSV file with headers:
    ```csv
-   tai_khamyang_word,english_word,assamese_word,pronunciation,part_of_speech,example_sentence
+   tai_khamyang_word,english_word,assamese_word,pronunciation
    ```
 
 2. In Supabase Dashboard:
@@ -79,10 +77,10 @@ The schema includes RLS policies for security:
 #### Using SQL:
 
 ```sql
-INSERT INTO words (tai_khamyang_word, english_word, assamese_word, pronunciation, part_of_speech)
+INSERT INTO words (tai_khamyang_word, english_word, assamese_word, pronunciation)
 VALUES 
-  ('ꤢꤢ꤬', 'water', 'পানী', 'nam', 'noun'),
-  ('ꤢꤢ꤬ꤗꤢꤩ', 'food', 'খাদ্য', 'khao', 'noun');
+  ('ꤢꤢ꤬', 'water', 'পানী', 'nam'),
+  ('ꤢꤢ꤬ꤗꤢꤩ', 'food', 'খাদ্য', 'khao');
 ```
 
 ## Environment Variables

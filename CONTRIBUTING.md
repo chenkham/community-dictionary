@@ -96,7 +96,7 @@ If you want to add words to the dictionary:
 
 1. Prepare a CSV file with the format:
    ```csv
-   tai_khamyang_word,english_word,assamese_word,pronunciation,part_of_speech,example_sentence
+   tai_khamyang_word,english_word,assamese_word,pronunciation
    ```
 
 2. Submit via:

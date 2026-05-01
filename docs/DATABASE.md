@@ -26,8 +26,6 @@ CREATE TABLE words (
   english_word TEXT NOT NULL,
   assamese_word TEXT NOT NULL,
   pronunciation TEXT,
-  part_of_speech TEXT,
-  example_sentence TEXT,
   audio_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -41,8 +39,6 @@ CREATE TABLE words (
 - `english_word`: English translation
 - `assamese_word`: Assamese translation (অসমীয়া)
 - `pronunciation`: Phonetic guide (e.g., "nam" for water)
-- `part_of_speech`: noun, verb, adjective, adverb, etc.
-- `example_sentence`: Usage example
 - `audio_url`: Link to pronunciation audio file
 - `created_at`: Timestamp of creation
 - `updated_at`: Timestamp of last update
@@ -80,7 +76,6 @@ CREATE INDEX idx_words_english ON words USING gin(to_tsvector('english', english
 CREATE INDEX idx_words_assamese ON words USING gin(to_tsvector('simple', assamese_word));
 
 -- Query optimization indexes
-CREATE INDEX idx_words_part_of_speech ON words(part_of_speech);
 CREATE INDEX idx_words_created_at ON words(created_at DESC);
 ```
 
@@ -129,8 +124,6 @@ RETURNS TABLE (
   english_word TEXT,
   assamese_word TEXT,
   pronunciation TEXT,
-  part_of_speech TEXT,
-  example_sentence TEXT,
   rank REAL
 ) AS $$
 BEGIN
@@ -141,8 +134,6 @@ BEGIN
     w.english_word,
     w.assamese_word,
     w.pronunciation,
-    w.part_of_speech,
-    w.example_sentence,
     ts_rank(
       to_tsvector('simple', w.tai_khamyang_word || ' ' || w.english_word || ' ' || w.assamese_word),
       plainto_tsquery('simple', search_query)
@@ -190,11 +181,6 @@ SELECT * FROM words ORDER BY created_at DESC LIMIT 50;
 SELECT * FROM search_words('house');
 ```
 
-### Get Words by Part of Speech
-```sql
-SELECT * FROM words WHERE part_of_speech = 'noun';
-```
-
 ### Get Recent Additions
 ```sql
 SELECT * FROM words 
@@ -218,8 +204,8 @@ FROM words;
 
 1. Prepare CSV file:
 ```csv
-tai_khamyang_word,english_word,assamese_word,pronunciation,part_of_speech,example_sentence
-ꤢꤢ꤬,water,পানী,nam,noun,I drink water every day
+tai_khamyang_word,english_word,assamese_word,pronunciation
+ꤢꤢ꤬,water,পানী,nam
 ```
 
 2. In Supabase Dashboard:

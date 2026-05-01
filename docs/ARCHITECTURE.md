@@ -206,8 +206,6 @@ User Input (New Word)
 │ english_word     │
 │ assamese_word    │
 │ pronunciation    │
-│ part_of_speech   │
-│ example_sentence │
 │ audio_url        │
 │ created_at       │
 │ updated_at       │

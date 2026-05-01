@@ -28,8 +28,6 @@ CREATE TABLE IF NOT EXISTS words (
   english_word TEXT NOT NULL,
   assamese_word TEXT NOT NULL,
   pronunciation TEXT,
-  part_of_speech TEXT,
-  example_sentence TEXT,
   audio_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -40,7 +38,6 @@ CREATE TABLE IF NOT EXISTS words (
 CREATE INDEX IF NOT EXISTS idx_words_tai ON words USING gin(to_tsvector('simple', tai_khamyang_word));
 CREATE INDEX IF NOT EXISTS idx_words_english ON words USING gin(to_tsvector('english', english_word));
 CREATE INDEX IF NOT EXISTS idx_words_assamese ON words USING gin(to_tsvector('simple', assamese_word));
-CREATE INDEX IF NOT EXISTS idx_words_part_of_speech ON words(part_of_speech);
 CREATE INDEX IF NOT EXISTS idx_words_created_at ON words(created_at DESC);
 
 -- Function to update updated_at timestamp
@@ -92,8 +89,6 @@ RETURNS TABLE (
   english_word TEXT,
   assamese_word TEXT,
   pronunciation TEXT,
-  part_of_speech TEXT,
-  example_sentence TEXT,
   rank REAL
 ) AS $$
 BEGIN
@@ -104,8 +99,6 @@ BEGIN
     w.english_word,
     w.assamese_word,
     w.pronunciation,
-    w.part_of_speech,
-    w.example_sentence,
     ts_rank(
       to_tsvector('simple', w.tai_khamyang_word || ' ' || w.english_word || ' ' || w.assamese_word),
       plainto_tsquery('simple', search_query)
@@ -119,10 +112,10 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Sample data (optional - remove if you want to start with empty database)
-INSERT INTO words (tai_khamyang_word, english_word, assamese_word, pronunciation, part_of_speech, example_sentence) VALUES
-  ('ꤢꤢ꤬', 'water', 'পানী', 'nam', 'noun', 'I drink water every day.'),
-  ('ꤢꤢ꤬ꤗꤢꤩ', 'food', 'খাদ্য', 'khao', 'noun', 'We eat food together.'),
-  ('ꤘꤢꤩ', 'house', 'ঘৰ', 'huen', 'noun', 'This is my house.')
+INSERT INTO words (tai_khamyang_word, english_word, assamese_word, pronunciation) VALUES
+  ('ꤢꤢ꤬', 'water', 'পানী', 'nam'),
+  ('ꤢꤢ꤬ꤗꤢꤩ', 'food', 'খাদ্য', 'khao'),
+  ('ꤘꤢꤩ', 'house', 'ঘৰ', 'huen')
 ON CONFLICT DO NOTHING;
 
 -- Create a view for easy querying

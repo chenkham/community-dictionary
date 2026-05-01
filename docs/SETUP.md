@@ -190,9 +190,9 @@ Should return:
 
 1. Create a CSV file:
    ```csv
-   tai_khamyang_word,english_word,assamese_word,pronunciation,part_of_speech,example_sentence
-   ꤢꤢ꤬,water,পানী,nam,noun,I drink water every day
-   ꤢꤢ꤬ꤗꤢꤩ,food,খাদ্য,khao,noun,We eat food together
+   tai_khamyang_word,english_word,assamese_word,pronunciation
+   ꤢꤢ꤬,water,পানী,nam
+   ꤢꤢ꤬ꤗꤢꤩ,food,খাদ্য,khao
    ```
 
 2. In Supabase:
@@ -206,10 +206,10 @@ Should return:
 
 In Supabase SQL Editor:
 ```sql
-INSERT INTO words (tai_khamyang_word, english_word, assamese_word, pronunciation, part_of_speech)
+INSERT INTO words (tai_khamyang_word, english_word, assamese_word, pronunciation)
 VALUES 
-  ('ꤢꤢ꤬', 'water', 'পানী', 'nam', 'noun'),
-  ('ꤘꤢꤩ', 'house', 'ঘৰ', 'huen', 'noun');
+  ('ꤢꤢ꤬', 'water', 'পানী', 'nam'),
+  ('ꤘꤢꤩ', 'house', 'ঘৰ', 'huen');
 ```
 
 ## Troubleshooting

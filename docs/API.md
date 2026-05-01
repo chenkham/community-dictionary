@@ -43,7 +43,6 @@ Get all words with pagination.
 - `page` (optional): Page number (default: 1)
 - `limit` (optional): Items per page (default: 20, max: 100)
 - `language` (optional): Filter by language (tai, en, as)
-- `part_of_speech` (optional): Filter by part of speech
 
 **Example:**
 ```
@@ -60,8 +59,6 @@ GET /api/words?page=1&limit=20&language=en
       "english_word": "water",
       "assamese_word": "পানী",
       "pronunciation": "nam",
-      "part_of_speech": "noun",
-      "example_sentence": "I drink water every day.",
       "created_at": "2024-01-15T10:00:00.000Z",
       "updated_at": "2024-01-15T10:00:00.000Z"
     }
@@ -87,8 +84,6 @@ Get a specific word by ID.
   "english_word": "water",
   "assamese_word": "পানী",
   "pronunciation": "nam",
-  "part_of_speech": "noun",
-  "example_sentence": "I drink water every day.",
   "created_at": "2024-01-15T10:00:00.000Z",
   "updated_at": "2024-01-15T10:00:00.000Z"
 }
@@ -118,7 +113,6 @@ GET /api/words/search?q=water&limit=10
       "english_word": "water",
       "assamese_word": "পানী",
       "pronunciation": "nam",
-      "part_of_speech": "noun",
       "rank": 0.95
     }
   ],
@@ -136,9 +130,7 @@ Create a new word entry (requires authentication).
   "tai_khamyang_word": "ꤢꤢ꤬",
   "english_word": "water",
   "assamese_word": "পানী",
-  "pronunciation": "nam",
-  "part_of_speech": "noun",
-  "example_sentence": "I drink water every day."
+  "pronunciation": "nam"
 }
 ```
 
@@ -150,8 +142,6 @@ Create a new word entry (requires authentication).
   "english_word": "water",
   "assamese_word": "পানী",
   "pronunciation": "nam",
-  "part_of_speech": "noun",
-  "example_sentence": "I drink water every day.",
   "created_at": "2024-01-15T10:00:00.000Z",
   "updated_at": "2024-01-15T10:00:00.000Z"
 }
@@ -164,8 +154,7 @@ Update a word entry (requires authentication, own entries only).
 **Request Body:**
 ```json
 {
-  "pronunciation": "naam",
-  "example_sentence": "Updated example sentence."
+  "pronunciation": "naam"
 }
 ```
 
@@ -177,8 +166,6 @@ Update a word entry (requires authentication, own entries only).
   "english_word": "water",
   "assamese_word": "পানী",
   "pronunciation": "naam",
-  "part_of_speech": "noun",
-  "example_sentence": "Updated example sentence.",
   "created_at": "2024-01-15T10:00:00.000Z",
   "updated_at": "2024-01-15T11:00:00.000Z"
 }

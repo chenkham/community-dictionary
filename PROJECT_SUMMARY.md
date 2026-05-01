@@ -62,8 +62,6 @@ community-dictionary/
 | english_word | TEXT | English translation |
 | assamese_word | TEXT | Assamese translation |
 | pronunciation | TEXT | Phonetic pronunciation |
-| part_of_speech | TEXT | noun, verb, adjective, etc. |
-| example_sentence | TEXT | Usage example |
 | audio_url | TEXT | Pronunciation audio (optional) |
 | created_at | TIMESTAMP | Creation time |
 | updated_at | TIMESTAMP | Last update time |
