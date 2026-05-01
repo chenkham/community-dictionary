@@ -50,6 +50,7 @@ my-community-app/
 - Node.js >= 18.0.0
 - npm >= 9.0.0
 - Git
+- Expo Go app (for mobile testing)
 
 ### Installation
 
@@ -64,36 +65,44 @@ cd community-dictionary
 npm install
 ```
 
-3. Set up environment variables:
+3. Set up Supabase (see [docs/SETUP.md](docs/SETUP.md))
+
+4. Configure environment variables:
 ```bash
-# Copy example env files
+# API
 cp apps/api/.env.example apps/api/.env
-cp apps/web/.env.example apps/web/.env
+# Edit apps/api/.env with your Supabase credentials
+
+# Web
+cp apps/web/.env.example apps/web/.env.local
+# Edit with API URL
+
+# Mobile
 cp apps/mobile/.env.example apps/mobile/.env
+# Edit with API URL
 ```
 
-4. Configure Supabase:
-   - Create a project at [supabase.com](https://supabase.com)
-   - Copy your project URL and anon key to `.env` files
-   - Run database migrations (instructions in `packages/database/README.md`)
+### Running the Applications
 
-### Development
-
-Run all apps in development mode:
+**API Server:**
 ```bash
+cd apps/api
 npm run dev
+# Runs on http://localhost:3001
 ```
 
-Run specific app:
+**Web Application:**
 ```bash
-# API only
-cd apps/api && npm run dev
+cd apps/web
+npm run dev
+# Runs on http://localhost:3000
+```
 
-# Web only
-cd apps/web && npm run dev
-
-# Mobile only
-cd apps/mobile && npm run dev
+**Mobile Application:**
+```bash
+cd apps/mobile
+npm start
+# Scan QR code with Expo Go app
 ```
 
 ## 📊 Database Schema
@@ -136,9 +145,9 @@ Use the REST API endpoints to programmatically add words.
 
 ## 📱 Platform Support
 
-- ✅ Web (Desktop & Mobile browsers)
-- ✅ Android (via Expo)
-- ✅ iOS (via Expo)
+- ✅ **Web** - Desktop & Mobile browsers (responsive)
+- ✅ **Android** - Native app via Expo
+- ✅ **iOS** - Native app via Expo
 
 ## 🤝 Contributing
 
@@ -157,25 +166,21 @@ Contributions are welcome! This is a community-driven project.
 - [x] Monorepo configuration
 - [x] Documentation
 
-### Phase 2: Database & Backend (Current)
-- [ ] Supabase project setup
-- [ ] Database schema design
-- [ ] API endpoints (Hono.js)
-- [ ] Authentication system
-- [ ] Data validation
+### Phase 2: Database & Backend ✅
+- [x] Supabase project setup
+- [x] Database schema design
+- [x] API endpoints (Hono.js)
+- [x] Authentication system
+- [x] Data validation
 
-### Phase 3: Frontend Development
-- [ ] Shared UI component library
-- [ ] Web application (Next.js)
-- [ ] Mobile application (Expo)
-- [ ] Search functionality
-- [ ] Offline support
+### Phase 3: Frontend Development ✅
+- [x] Web application (Next.js)
+- [x] Native mobile app (Expo)
+- [x] Search functionality
+- [x] Responsive design
+- [x] TypeScript throughout
 
-### Phase 4: Enhancement
-- [ ] Audio pronunciations
-- [ ] User contributions
-- [ ] Admin dashboard
-- [ ] Analytics
+### All Phases Complete! 🎉
 
 ## 📄 License
 
