@@ -22,6 +22,7 @@ export default {
         backgroundColor: '#0284c7',
       },
       package: 'com.chenkham.communitydictionary',
+      permissions: ['INTERNET'],
     },
     web: {
       favicon: './assets/favicon.png',
@@ -30,6 +31,9 @@ export default {
     plugins: ['expo-router'],
     extra: {
       apiUrl: 'http://10.230.209.73:3001',
+      eas: {
+        projectId: 'your-project-id-will-be-here'
+      }
     },
   },
 };
