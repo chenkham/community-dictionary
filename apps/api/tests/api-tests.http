@@ -1,0 +1,109 @@
+### Community Dictionary API Tests
+### Use with REST Client extension in VS Code or Thunder Client
+
+@baseUrl = http://localhost:3001
+
+### Health Check
+GET {{baseUrl}}/api/health
+
+### Root Endpoint
+GET {{baseUrl}}/
+
+###
+
+### ========== WORDS ENDPOINTS ==========
+
+### Get all words (default pagination)
+GET {{baseUrl}}/api/words
+
+### Get words with pagination
+GET {{baseUrl}}/api/words?page=1&limit=10
+
+### Get words filtered by language (English)
+GET {{baseUrl}}/api/words?language=en
+
+### Get words filtered by language (Tai Khamyang)
+GET {{baseUrl}}/api/words?language=tai
+
+### Get words filtered by language (Assamese)
+GET {{baseUrl}}/api/words?language=as
+
+### Search for words
+GET {{baseUrl}}/api/words/search?q=water
+
+### Search with limit
+GET {{baseUrl}}/api/words/search?q=house&limit=5
+
+### Get specific word by ID (replace with actual ID from your database)
+GET {{baseUrl}}/api/words/550e8400-e29b-41d4-a716-446655440000
+
+### Create a new word
+POST {{baseUrl}}/api/words
+Content-Type: application/json
+
+{
+  "tai_khamyang_word": "ꤢꤢ꤬",
+  "english_word": "water",
+  "assamese_word": "পানী",
+  "pronunciation": "nam"
+}
+
+### Create word with audio URL
+POST {{baseUrl}}/api/words
+Content-Type: application/json
+
+{
+  "tai_khamyang_word": "ꤘꤢꤩ",
+  "english_word": "house",
+  "assamese_word": "ঘৰ",
+  "pronunciation": "huen",
+  "audio_url": "https://example.com/audio/house.mp3"
+}
+
+### Update a word (replace ID with actual ID)
+PUT {{baseUrl}}/api/words/550e8400-e29b-41d4-a716-446655440000
+Content-Type: application/json
+
+{
+  "pronunciation": "naam"
+}
+
+### Update multiple fields
+PUT {{baseUrl}}/api/words/550e8400-e29b-41d4-a716-446655440000
+Content-Type: application/json
+
+{
+  "pronunciation": "naam",
+  "audio_url": "https://example.com/audio/water-updated.mp3"
+}
+
+### Delete a word (replace ID with actual ID)
+DELETE {{baseUrl}}/api/words/550e8400-e29b-41d4-a716-446655440000
+
+###
+
+### ========== LANGUAGES ENDPOINTS ==========
+
+### Get all languages
+GET {{baseUrl}}/api/languages
+
+###
+
+### ========== ERROR CASES ==========
+
+### 404 - Word not found
+GET {{baseUrl}}/api/words/00000000-0000-0000-0000-000000000000
+
+### 400 - Invalid search query (missing q parameter)
+GET {{baseUrl}}/api/words/search
+
+### 400 - Invalid word creation (missing required fields)
+POST {{baseUrl}}/api/words
+Content-Type: application/json
+
+{
+  "tai_khamyang_word": "test"
+}
+
+### 404 - Invalid endpoint
+GET {{baseUrl}}/api/invalid-endpoint
