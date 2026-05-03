@@ -1,159 +1,77 @@
-# Contributing to Community Dictionary
+# Contributing
 
-Thank you for your interest in contributing to the Community Dictionary project! This document provides guidelines for contributing.
+Thank you for your interest in this project. Contributions are welcome in many forms — code, word entries, cultural knowledge, photos, translations, corrections, or documentation.
 
-## How to Contribute
+---
 
-### Reporting Issues
+## Ways to Contribute
 
-- Use the GitHub issue tracker
-- Check if the issue already exists
-- Provide detailed information:
-  - Steps to reproduce
-  - Expected behavior
-  - Actual behavior
-  - Screenshots if applicable
+### Add Words or Phrases
 
-### Suggesting Features
+The most valuable contribution is language data. You can submit new Tai Khamyang words by:
 
-- Open an issue with the "feature request" label
-- Describe the feature and its benefits
-- Explain how it would work
-
-### Code Contributions
-
-1. **Fork the repository**
-   ```bash
-   git clone https://github.com/chenkham/community-dictionary.git
-   cd community-dictionary
-   ```
-
-2. **Create a branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-3. **Make your changes**
-   - Follow the code style
-   - Write clear commit messages
-   - Add tests if applicable
-
-4. **Test your changes**
-   ```bash
-   npm run lint
-   npm run build
-   ```
-
-5. **Commit your changes**
-   ```bash
-   git add .
-   git commit -m "feat: add new feature"
-   ```
-
-6. **Push to your fork**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-7. **Create a Pull Request**
-   - Go to the original repository
-   - Click "New Pull Request"
-   - Select your branch
-   - Describe your changes
-
-## Commit Message Guidelines
-
-We follow conventional commits:
-
-- `feat:` New feature
-- `fix:` Bug fix
-- `docs:` Documentation changes
-- `style:` Code style changes (formatting)
-- `refactor:` Code refactoring
-- `test:` Adding tests
-- `chore:` Maintenance tasks
-
-Examples:
-```
-feat: add search functionality to mobile app
-fix: resolve word display issue on iOS
-docs: update API documentation
-```
-
-## Code Style
-
-- Use TypeScript for type safety
-- Follow the existing code structure
-- Use meaningful variable names
-- Add comments for complex logic
-- Keep functions small and focused
-
-## Adding Dictionary Words
-
-### For Contributors
-
-If you want to add words to the dictionary:
-
-1. Prepare a CSV file with the format:
+1. Opening a GitHub issue with the word, its English and Assamese translations, and pronunciation
+2. Submitting a CSV file via pull request with the format:
    ```csv
    tai_khamyang_word,english_word,assamese_word,pronunciation
    ```
+3. Using the in-app "Contribute Word" form (submissions are reviewed before publishing)
 
-2. Submit via:
-   - Pull request with the CSV file in `data/words/`
-   - Or create an issue with the words
+Please ensure translations are accurate. Include pronunciation and part of speech where possible.
 
-### Quality Guidelines
+### Report Issues
 
-- Ensure accurate translations
-- Provide pronunciation when possible
-- Include example sentences
-- Specify part of speech (noun, verb, etc.)
+Use the [GitHub issue tracker](https://github.com/chenkham/community-dictionary/issues). Include:
 
-## Development Setup
+- Steps to reproduce
+- Expected vs actual behaviour
+- Screenshots if relevant
 
-1. Install dependencies:
+### Submit Code
+
+1. Fork the repository
+2. Create a branch from `main`:
    ```bash
-   npm install
+   git checkout -b fix/description
    ```
-
-2. Set up environment variables:
+3. Make your changes following the existing code style
+4. Test locally:
    ```bash
-   cp apps/api/.env.example apps/api/.env
-   cp apps/web/.env.example apps/web/.env
-   cp apps/mobile/.env.example apps/mobile/.env
+   npm run build
    ```
-
-3. Start development:
-   ```bash
-   npm run dev
+5. Commit using conventional format:
    ```
+   feat: add audio playback to learn page
+   fix: resolve search bar focus issue
+   docs: update setup instructions
+   ```
+6. Push and open a pull request against `main`
 
-## Project Structure
+### Contribute Photos or Cultural Content
 
-```
-community-dictionary/
-├── apps/
-│   ├── api/          # Backend API
-│   ├── mobile/       # Mobile app
-│   └── web/          # Web app
-├── packages/
-│   ├── database/     # Database schemas
-│   └── ui/           # Shared components
-└── docs/             # Documentation
-```
+If you have photos of Tai Khamyang culture, festivals, monasteries, or village life, please reach out via GitHub issues. Images can be hosted via Google Drive or cloud links.
 
-## Questions?
+---
 
-- Open an issue for questions
-- Join our community discussions
-- Contact: [@chenkham](https://github.com/chenkham)
+## Code Guidelines
+
+- **TypeScript** throughout — no `any` types unless unavoidable
+- **Tailwind CSS** for styling — use CSS variables defined in `globals.css`
+- **Existing patterns** — follow the component and page structure already in place
+- **No hardcoded strings** for content data — use `lib/content.ts` or the API layer
+- Keep functions focused and files under 200 lines where practical
+
+## Project Setup
+
+See [SETUP.md](SETUP.md) for installation and environment configuration.
 
 ## Code of Conduct
 
-- Be respectful and inclusive
-- Welcome newcomers
-- Focus on constructive feedback
-- Help others learn
+- Be respectful and welcoming
+- Give constructive feedback
+- Credit cultural knowledge to its source
+- Prioritise accuracy over speed
 
-Thank you for contributing! 🙏
+## Questions
+
+Open a GitHub issue or reach out to [@chenkham](https://github.com/chenkham).

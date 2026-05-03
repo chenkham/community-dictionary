@@ -55,3 +55,7 @@ export async function getWord(id: string): Promise<Word> {
   if (!response.ok) throw new Error('Failed to fetch word');
   return response.json();
 }
+
+export async function getWordById(id: string): Promise<Word> {
+  return getWord(id);
+}

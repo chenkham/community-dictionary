@@ -1,3 +1,5 @@
+import { Search, X } from 'lucide-react';
+
 interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
@@ -8,42 +10,28 @@ export default function SearchBar({ value, onChange, placeholder }: SearchBarPro
   return (
     <div className="relative max-w-2xl mx-auto">
       <div className="relative">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-light)]" />
         <input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder || 'Search...'}
-          className="w-full px-5 py-3.5 text-base border-2 border-gray-300 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all"
+          className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg)] py-2.5 pl-10 pr-10 text-sm outline-none transition-all focus:border-[#0891B2] focus:ring-2 focus:ring-[#0891B2]/10"
         />
-        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-          <svg
-            className="w-5 h-5 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {value && (
+          <button
+            onClick={() => onChange('')}
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full text-[var(--text-light)] hover:text-[var(--text)] transition-colors"
+            aria-label="Clear search"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </div>
+            <X className="w-4 h-4" />
+          </button>
+        )}
       </div>
-      {value && (
-        <button
-          onClick={() => onChange('')}
-          className="absolute right-12 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-        >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
+      {!value && (
+        <p className="mt-1.5 text-center text-[11px] text-[var(--text-light)]">
+          Tip: search works in all three languages
+        </p>
       )}
     </div>
   );

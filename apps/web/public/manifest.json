@@ -1,0 +1,17 @@
+{
+  "name": "Tai Khamyang Hub",
+  "short_name": "TK Hub",
+  "description": "Preserving the Tai Khamyang language, manuscripts, and Buddhist heritage.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0077B6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
