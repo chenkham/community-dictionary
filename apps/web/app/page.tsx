@@ -1,123 +1,116 @@
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import WordOfTheDay from '@/components/WordOfTheDay';
+import HeroCarousel from '@/components/HeroCarousel';
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen pt-20 sm:pt-28 pb-20 w-full bg-transparent">
-      {/* -- Premium Hero Section with Buddha Image -- */}
-      <section className="relative w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 mb-24 sm:mb-32">
-        <div className="relative rounded-none sm:rounded-[2.5rem] overflow-hidden h-[60vh] min-h-[500px] flex items-end shadow-2xl">
-          {/* Extremely reliable Unsplash image */}
-          <div className="absolute inset-0">
-            <img 
-              src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&q=80&w=2070" 
-              alt="Golden Buddha" 
-              className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[10s] ease-out"
-            />
-            {/* Elegant gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
-          </div>
-          
-          <div className="relative z-10 p-8 sm:p-12 lg:p-16 w-full md:w-3/4 lg:w-2/3">
-            <h1 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
-              Tai Khamyang <br />
-              <span className="text-amber-400 font-light italic">People of Gold</span>
-            </h1>
-            <p className="text-base sm:text-lg text-gray-200 mb-8 leading-relaxed max-w-2xl font-light">
-              Preserving the language, sacred manuscripts, Buddhist chants, and living heritage of our Theravada Buddhist community in Northeast India.
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="/dictionary" className="px-8 py-3.5 rounded-full bg-amber-600 hover:bg-amber-500 text-white font-semibold transition-all text-base">
-                Explore Dictionary
-              </Link>
-              <Link href="/about" className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 font-semibold transition-all text-base">
-                Our Story
-              </Link>
-            </div>
-          </div>
+    <div className="relative min-h-screen pt-20 sm:pt-28 pb-20 w-full">
+      {/* === Hero Carousel === */}
+      <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 mb-16 sm:mb-24">
+        <HeroCarousel />
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <Link href="/dictionary" className="px-7 py-3 rounded-full btn-ocean text-white font-semibold text-sm shadow-md">
+            Explore Dictionary
+          </Link>
+          <Link href="/about" className="px-7 py-3 rounded-full border border-[var(--border-strong)] text-[var(--text)] hover:bg-white/60 font-semibold text-sm transition-all">
+            Our Story
+          </Link>
         </div>
       </section>
 
-      {/* -- Word of the Day -- */}
-      <section className="w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 mb-24 sm:mb-32">
+      {/* === Word of the Day === */}
+      <section className="w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 mb-20">
         <WordOfTheDay />
       </section>
 
-      {/* -- Discover Categories (List + Beautiful Photo) -- */}
-      <section className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 mb-24 sm:mb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          
-          <div className="lg:col-span-7 flex flex-col">
-            <div className="mb-10">
-              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-gray-900">
-                Discover Our Heritage
-              </h2>
-              <p className="text-base sm:text-lg text-gray-500 mt-3 font-light leading-relaxed">
-                Journey through the faith, traditions, and vibrant culture that define the Tai Khamyang way of life.
-              </p>
+      {/* === Heritage Categories with side image === */}
+      <section className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="dot dot-jade" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Heritage</span>
             </div>
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--text)] mb-2">
+              Discover Our <span className="g-text g-ocean">Heritage</span>
+            </h2>
+            <p className="text-sm text-[var(--text-muted)] mb-6 max-w-xl leading-relaxed">
+              Journey through the faith, language, and vibrant culture of the Tai Khamyang way of life.
+            </p>
+            <div className="divider-ocean mb-2" />
 
             {[
-              { href: '/manuscripts', title: 'Sacred Texts', desc: 'Ancient folios and monastery records.' },
-              { href: '/chants', title: 'Buddhist Chants', desc: 'The sound of devotion and Pali scriptures.' },
-              { href: '/traditions', title: 'Traditions', desc: 'Chang Ghor houses and handloom weaving.' },
-              { href: '/gallery', title: 'Photo Gallery', desc: 'Visual archive of cultural life.' },
-              { href: '/cuisine', title: 'Cuisine', desc: 'Traditional food and recipes.' },
-              { href: '/learn', title: 'Learn', desc: 'Phrases and numbers in Tai Khamyang.' },
+              { href: '/festivals',  title: 'Festivals',   desc: 'Poi Sangken, Mai-Ko-Sum-Phai, and Buddhist holy days.' },
+              { href: '/cuisine',    title: 'Cuisine',     desc: 'Khaulam, sticky rice in Ko-leaves, fermented fish.' },
+              { href: '/learn',      title: 'Learn',       desc: 'Phrases, numbers, and greetings in Tai Khamyang.' },
+              { href: '/villages',   title: 'Villages',    desc: 'Shyam Gaon settlements across upper Assam.' },
+              { href: '/news',       title: 'News',        desc: 'Latest from the community and preservation efforts.' },
+              { href: '/resources',  title: 'Resources',   desc: 'External archives, scholarly articles, and links.' },
             ].map((item) => (
-              <Link 
-                key={item.title} 
+              <Link
+                key={item.title}
                 href={item.href}
-                className="group flex items-center justify-between py-6 border-b border-gray-200/60 hover:border-amber-400 transition-colors"
+                className="group flex items-center justify-between py-5 border-b border-[var(--border)] hover:border-[#0891B2] transition-colors"
               >
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-amber-700 transition-colors font-heading mb-1">{item.title}</h3>
-                  <p className="text-gray-500 text-sm sm:text-base font-light">{item.desc}</p>
+                <div className="flex items-center gap-4 min-w-0">
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-[var(--text)] group-hover:text-[#0891B2] transition-colors font-heading mb-0.5">{item.title}</h3>
+                    <p className="text-[var(--text-muted)] text-xs sm:text-sm font-light">{item.desc}</p>
+                  </div>
                 </div>
-                <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:text-amber-600 group-hover:border-amber-200 group-hover:bg-amber-50 transition-all shrink-0">
+                <div className="w-9 h-9 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--text-light)] group-hover:text-[#0891B2] group-hover:border-[#0891B2]/40 group-hover:bg-[#0891B2]/5 transition-all shrink-0">
                   <ArrowUpRight className="w-4 h-4" />
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="lg:col-span-5 h-[500px] lg:h-[700px] rounded-[2.5rem] overflow-hidden shadow-2xl relative order-first lg:order-last">
-            <img 
-              src="https://images.unsplash.com/photo-1540324155974-7523202daa3f?auto=format&fit=crop&q=80&w=1000" 
-              alt="Monastery" 
-              className="absolute inset-0 w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[15s] ease-out"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-teal-900/60 to-transparent" />
+          {/* Side image — a small monastery photo, not too large */}
+          <div className="lg:col-span-5 order-first lg:order-last">
+            <div className="sticky top-28 rounded-[1.5rem] overflow-hidden shadow-xl relative h-[260px] sm:h-[320px] lg:h-[440px]">
+              <img
+                src="https://images.unsplash.com/photo-1545048702-79362596cdc9?auto=format&fit=crop&q=80&w=1000"
+                alt="Theravada monastery in upper Assam"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F2027]/70 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-5 right-5 text-white">
+                <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-200 mb-1">Heritage</div>
+                <div className="font-heading text-base font-bold">Village monastery (kyong)</div>
+                <div className="text-xs text-white/80 mt-0.5">Heart of every Tai Khamyang settlement.</div>
+              </div>
+            </div>
           </div>
-
         </div>
       </section>
 
-      {/* -- Cultural Insight -- */}
+      {/* === Living Tradition quote with small portrait image === */}
       <section className="w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex flex-col md:flex-row gap-8 items-center justify-center py-16 text-center md:text-left relative">
-          
-          <div className="w-32 h-32 md:w-48 md:h-48 shrink-0 rounded-full overflow-hidden shadow-xl border-4 border-white">
-            <img 
-              src="https://images.unsplash.com/photo-1515266597335-b223e7f41539?auto=format&fit=crop&q=80&w=500" 
-              alt="Elder in nature" 
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start py-10">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 shrink-0 rounded-2xl overflow-hidden shadow-lg ring-2 ring-white">
+            <img
+              src="https://images.unsplash.com/photo-1530432914937-1ad9c1d2f76a?auto=format&fit=crop&q=80&w=400"
+              alt="Buddhist elder"
               className="w-full h-full object-cover"
             />
           </div>
-
           <div className="flex-1">
-            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-              A Living Tradition
+            <div className="flex items-center gap-2 mb-2">
+              <div className="dot dot-jade" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Community Voice</span>
+            </div>
+            <h2 className="font-heading text-xl sm:text-2xl font-bold text-[var(--text)] mb-3">
+              A <span className="g-text g-jade">Living</span> Tradition
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-6 font-light italic">
-              "Having left our ancient homeland as a community, having wandered together for ages, and shared all major upheavals together, community living is very significant for us."
+            <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed mb-4 italic">
+              “Having left our ancient homeland as a community, having wandered together for ages, and shared all major upheavals together — community living is very significant for us.”
             </p>
-            <Link href="/community" className="inline-flex items-center gap-2 text-amber-700 font-bold hover:text-amber-600 transition-colors text-base group">
-              Meet the Community <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <Link href="/about" className="inline-flex items-center gap-1.5 text-sm font-semibold g-text g-ocean group">
+              Learn our full story
+              <ArrowRight className="w-4 h-4 text-[#0891B2] group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-
         </div>
       </section>
     </div>

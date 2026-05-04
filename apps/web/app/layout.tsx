@@ -55,11 +55,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm font-semibold text-gray-600">
-                    <Link href="/dictionary" className="hover:text-amber-600 transition-colors">Dictionary</Link>
-                    <Link href="/about" className="hover:text-amber-600 transition-colors">About</Link>
-                    <Link href="/resources" className="hover:text-amber-600 transition-colors">Resources</Link>
-                    <Link href="/gallery" className="hover:text-amber-600 transition-colors">Gallery</Link>
-                    <Link href="/news" className="hover:text-amber-600 transition-colors">News</Link>
+                    <Link href="/dictionary" className="hover:text-[#0891B2] transition-colors">Dictionary</Link>
+                    <Link href="/about" className="hover:text-[#0891B2] transition-colors">About</Link>
+                    <Link href="/festivals" className="hover:text-[#0891B2] transition-colors">Festivals</Link>
+                    <Link href="/cuisine" className="hover:text-[#0891B2] transition-colors">Cuisine</Link>
+                    <Link href="/learn" className="hover:text-[#0891B2] transition-colors">Learn</Link>
+                    <Link href="/news" className="hover:text-[#0891B2] transition-colors">News</Link>
+                    <Link href="/resources" className="hover:text-[#0891B2] transition-colors">Resources</Link>
                   </div>
                 </div>
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8 opacity-50" />

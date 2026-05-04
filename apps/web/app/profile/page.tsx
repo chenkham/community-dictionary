@@ -95,31 +95,13 @@ export default function ProfilePage() {
         )}
       </section>
 
-      {/* Stats */}
-      <section className="mb-10 anim-fade-up anim-delay-1">
-        <div className="divider-ocean mb-1" />
-        <div className="flex gap-8 py-3">
-          <div>
-            <div className="text-lg font-bold g-text g-ocean">12</div>
-            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Contributions</div>
-          </div>
-          <div>
-            <div className="text-lg font-bold g-text g-rose">8</div>
-            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Favorites</div>
-          </div>
-          <div>
-            <div className="text-lg font-bold g-text g-amber">5</div>
-            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Day Streak</div>
-          </div>
-        </div>
-      </section>
-
       {/* Quick Links */}
       <section className="anim-fade-up anim-delay-2">
         <div className="divider-ocean mb-1" />
         {[
-          { label: 'My Favorites', href: '/favorites' },
           { label: 'Browse Dictionary', href: '/dictionary' },
+          { label: 'About the Tai Khamyang', href: '/about' },
+          { label: 'Learn Phrases', href: '/learn' },
         ].map((link) => (
           <div key={link.href}>
             <button onClick={() => router.push(link.href)} className="flex items-center justify-between w-full py-3 row-hover rounded group">

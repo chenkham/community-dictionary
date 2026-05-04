@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowRight, Search } from 'lucide-react';
-import SearchBar from '@/components/SearchBar';
+import { ArrowRight, Search, X } from 'lucide-react';
 import WordCard from '@/components/WordCard';
 import WordOfTheDay from '@/components/WordOfTheDay';
 import { getWords, searchWords } from '@/lib/api';
@@ -19,11 +18,6 @@ const languageFilters = [
 export default function DictionaryPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState<'all' | 'tai' | 'en' | 'as'>('all');
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  useEffect(() => {
-    setFavorites(JSON.parse(localStorage.getItem('favorites') || '[]'));
-  }, []);
 
   const { data: allWords, isLoading: loadingAll } = useQuery({
     queryKey: ['words', selectedLanguage],
@@ -42,66 +36,72 @@ export default function DictionaryPage() {
   const totalWords = allWords?.pagination?.total ?? words?.length ?? 0;
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-6 pt-24 pb-16 sm:pt-32 sm:px-8 lg:px-12">
-      {/* Header */}
-      <div className="mb-8 anim-fade-up">
-        <div className="flex items-center gap-2 mb-4">
+    <main className="mx-auto w-full max-w-5xl px-5 pt-24 pb-16 sm:pt-28 sm:px-8">
+      {/* === SEARCH-FIRST HERO — the most prominent thing on the page === */}
+      <section className="anim-fade-up text-center mb-6 sm:mb-8">
+        <div className="inline-flex items-center gap-2 mb-3">
           <div className="dot dot-jade" />
-          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Living Dictionary</span>
+          <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[var(--text-muted)]">Living Dictionary</span>
         </div>
-
-        <h1 className="font-heading text-2xl sm:text-3xl font-bold mb-2">
-          Tai Khamyang <span className="g-text g-jade">Dictionary</span>
+        <h1 className="font-heading text-2xl sm:text-4xl font-bold mb-2 leading-tight">
+          Search the <span className="g-text g-ocean">Tai Khamyang</span> word
         </h1>
-        <p className="text-sm text-[var(--text-muted)] max-w-lg leading-relaxed mb-5">
-          Search across three languages --- Tai Khamyang, English, and Assamese. Part of the Southwestern Tai language family.
+        <p className="text-sm text-[var(--text-muted)] mb-6 max-w-md mx-auto">
+          Type any word in Tai Khamyang, English, or Assamese.
         </p>
 
-        {/* Stats inline */}
-        <div className="flex gap-6 mb-6">
-          <div>
-            <div className="text-lg font-bold g-text g-jade">{totalWords}</div>
-            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Entries</div>
-          </div>
-          <div>
-            <div className="text-lg font-bold g-text g-ocean">3</div>
-            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Languages</div>
-          </div>
-          <div>
-            <div className="text-lg font-bold g-text g-amber">Tai-Kadai</div>
-            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Family</div>
-          </div>
+        {/* The big search bar */}
+        <div className="relative max-w-2xl mx-auto">
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#0891B2]" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search words, meanings, or phrases…"
+            autoFocus
+            className="w-full rounded-full border-2 border-[var(--border)] bg-white py-4 pl-14 pr-12 text-base shadow-md outline-none transition-all focus:border-[#0891B2] focus:ring-4 focus:ring-[#0891B2]/15"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              aria-label="Clear search"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full bg-[var(--bg-soft)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
         </div>
 
-        <div className="divider-jade mb-5" />
-
-        {/* Word of the Day */}
-        <WordOfTheDay />
-      </div>
-
-      {/* Search + Filters */}
-      <div className="mb-6 anim-fade-up anim-delay-1">
-        <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search words, meanings, or phrases..." />
-
-        <div className="flex flex-wrap gap-1.5 mt-3">
+        {/* Language filters — right under search */}
+        <div className="flex flex-wrap justify-center gap-2 mt-4">
           {languageFilters.map((f) => (
             <button
               key={f.value}
               onClick={() => setSelectedLanguage(f.value)}
-              className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                 selectedLanguage === f.value
-                  ? 'btn-jade text-white'
-                  : 'text-[var(--text-muted)] border border-[var(--border)] hover:text-[var(--text)]'
+                  ? 'btn-ocean text-white shadow-sm'
+                  : 'bg-white border border-[var(--border)] text-[var(--text-muted)] hover:border-[#0891B2]/40 hover:text-[var(--text)]'
               }`}
             >
               {f.label}
             </button>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Results */}
-      <div className="anim-fade-up anim-delay-2">
+      {/* === RESULTS — immediately under the search === */}
+      <section className="anim-fade-up anim-delay-1 mb-12">
+        {searchQuery ? (
+          <div className="text-[12px] text-[var(--text-muted)] mb-3 px-1">
+            {isLoading ? 'Searching…' : `${words?.length || 0} result${words?.length === 1 ? '' : 's'} for “${searchQuery}”`}
+          </div>
+        ) : (
+          <div className="text-[12px] text-[var(--text-muted)] mb-3 px-1">
+            Browsing {totalWords} entries
+          </div>
+        )}
+
         {isLoading ? (
           <div className="grid gap-2 sm:grid-cols-2">
             {Array.from({ length: 8 }).map((_, i) => (
@@ -118,22 +118,45 @@ export default function DictionaryPage() {
         ) : words && words.length > 0 ? (
           <div className="grid gap-2 sm:grid-cols-2">
             {words.map((word: any) => (
-              <WordCard key={word.id} word={word} isFavorite={favorites.includes(word.id)} />
+              <WordCard key={word.id} word={word} />
             ))}
           </div>
         ) : (
-          <div className="py-20 text-center">
-            <Search className="w-5 h-5 text-[var(--text-light)] mx-auto mb-3" />
+          <div className="py-16 text-center">
+            <Search className="w-6 h-6 text-[var(--text-light)] mx-auto mb-3" />
             <h3 className="text-sm font-semibold mb-1">No matching results</h3>
-            <p className="text-sm text-[var(--text-light)]">Try a simpler query or switch filters.</p>
+            <p className="text-xs text-[var(--text-light)]">Try a simpler query or switch filters.</p>
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Footer link */}
-      <div className="divider-jade mt-8 mb-4" />
-      <Link href="/manuscripts" className="inline-flex items-center gap-1.5 text-sm font-semibold g-text g-amber">
-        Continue to manuscripts <ArrowRight className="w-3.5 h-3.5" />
+      {/* === SECONDARY: Stats + Word of the Day at the BOTTOM === */}
+      <div className="divider-ocean mb-10" />
+
+      <section className="anim-fade-up anim-delay-2 mb-10">
+        <div className="flex flex-wrap gap-x-10 gap-y-4">
+          <div>
+            <div className="text-xl font-bold g-text g-jade">{totalWords}</div>
+            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Entries</div>
+          </div>
+          <div>
+            <div className="text-xl font-bold g-text g-ocean">3</div>
+            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Languages</div>
+          </div>
+          <div>
+            <div className="text-xl font-bold g-text g-amber">Tai-Kadai</div>
+            <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)]">Family</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="anim-fade-up">
+        <WordOfTheDay />
+      </section>
+
+      <div className="divider-jade mt-10 mb-4" />
+      <Link href="/learn" className="inline-flex items-center gap-1.5 text-sm font-semibold g-text g-ocean">
+        Continue to phrases & numbers <ArrowRight className="w-3.5 h-3.5 text-[#0891B2]" />
       </Link>
     </main>
   );

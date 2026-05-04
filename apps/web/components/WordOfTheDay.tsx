@@ -34,38 +34,37 @@ export default function WordOfTheDay() {
 
   return (
     <Link href={`/word/${word.id}`} className="group block">
-      <div className="relative w-full py-8 border-b border-gray-200 transition-all duration-500 overflow-hidden group-hover:border-amber-400">
-
+      <div className="relative w-full py-7 border-b border-[var(--border)] transition-all duration-500 group-hover:border-[#0891B2]">
         <div className="relative z-10">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="text-amber-800 text-xs font-bold uppercase tracking-widest flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4" /> Word of the Day
+          <div className="flex items-center gap-3 mb-5">
+            <div className="text-xs font-bold uppercase tracking-[0.25em] g-text g-ocean flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-[#0891B2]" /> Word of the Day
             </div>
-            <span className="text-sm font-medium text-gray-400">
+            <span className="text-xs font-medium text-[var(--text-light)]">
               {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </span>
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h3 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 tracking-tight group-hover:text-amber-700 transition-colors">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
+            <div className="min-w-0">
+              <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text)] mb-3 tracking-tight group-hover:text-[#0E7490] transition-colors break-words">
                 {word.tai_khamyang_word}
               </h3>
-              <div className="flex flex-wrap items-center gap-4 text-xl sm:text-2xl text-gray-600">
-                <span className="font-medium text-amber-700">{word.english_word}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+              <div className="flex flex-wrap items-center gap-3 text-base sm:text-lg text-[var(--text-muted)]">
+                <span className="font-semibold g-text g-jade">{word.english_word}</span>
+                <span className="w-1 h-1 rounded-full bg-[var(--border-strong)]" />
                 <span className="font-medium">{word.assamese_word}</span>
               </div>
               {word.pronunciation && (
-                <div className="mt-4 flex items-center gap-2 text-gray-500 font-medium">
-                  <Volume2 className="w-5 h-5 text-gray-400" />
+                <div className="mt-3 flex items-center gap-2 text-[var(--text-muted)] font-medium text-sm">
+                  <Volume2 className="w-4 h-4 text-[var(--text-light)]" />
                   /{word.pronunciation}/
                 </div>
               )}
             </div>
 
-            <div className="flex items-center gap-2 text-amber-600 font-bold text-lg group-hover:gap-3 transition-all shrink-0 mt-4 md:mt-0">
-              View details <ArrowRight className="w-5 h-5" />
+            <div className="flex items-center gap-2 g-text g-ocean font-semibold text-sm group-hover:gap-3 transition-all shrink-0">
+              View details <ArrowRight className="w-4 h-4 text-[#0891B2]" />
             </div>
           </div>
         </div>
