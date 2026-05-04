@@ -15,10 +15,17 @@ export const metadata: Metadata = {
   description: 'Preserving the Tai Khamyang language, sacred manuscripts, Buddhist chants, festivals, and community memory.',
   manifest: '/manifest.json',
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'TK Hub' },
+  icons: {
+    icon: [
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#D97706',
+  themeColor: '#0891B2',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
