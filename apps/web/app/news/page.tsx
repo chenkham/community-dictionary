@@ -3,7 +3,7 @@ import { getNews } from '@/lib/content';
 import { ExternalLink } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'News & Events — Tai Khamyang Hub',
+  title: 'News & Events --- Tai Khamyang Hub',
   description: 'Latest news, events, and announcements from the Tai Khamyang community and heritage preservation efforts.',
 };
 
@@ -22,7 +22,7 @@ export default async function NewsPage() {
 
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <section className="mb-10 sm:mb-14 anim-fade-up">
           <div className="flex items-center gap-2 mb-4">
             <div className="dot dot-fire" />
@@ -32,7 +32,7 @@ export default async function NewsPage() {
             News &amp; <span className="g-text g-fire">Events</span>
           </h1>
           <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-lg leading-relaxed">
-            Stay informed about the Tai Khamyang community — language preservation, festivals, government initiatives, and cultural events.
+            Stay informed about the Tai Khamyang community --- language preservation, festivals, government initiatives, and cultural events.
           </p>
         </section>
 

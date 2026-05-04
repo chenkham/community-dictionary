@@ -70,7 +70,7 @@ export default function WordDetailPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-[90rem] px-4 pt-20 pb-12 sm:pt-24 sm:px-6">
+    <main className="mx-auto w-full max-w-7xl px-6 pt-24 pb-16 sm:pt-32 sm:px-8 lg:px-12">
       {/* Nav */}
       <div className="flex items-center justify-between mb-6">
         <button onClick={() => router.push('/dictionary')} className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">

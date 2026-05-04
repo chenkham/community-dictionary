@@ -20,7 +20,7 @@ export default function ProfilePage() {
   const handleCancel = () => { setEditForm(profile); setIsEditing(false); };
 
   return (
-    <main className="mx-auto w-full max-w-[90rem] px-4 pt-20 pb-12 sm:pt-24 sm:px-6">
+    <main className="mx-auto w-full max-w-7xl px-6 pt-24 pb-16 sm:pt-32 sm:px-8 lg:px-12">
       <button onClick={() => router.push('/dictionary')} className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors mb-6">
         <ChevronLeft className="w-4 h-4" /> Back to Dictionary
       </button>

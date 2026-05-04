@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Chants — Tai Khamyang Hub',
+  title: 'Chants --- Tai Khamyang Hub',
   description: 'Listen to and learn about Buddhist chants and recitations preserved by the Tai Khamyang community.',
 };
 
 export default function ChantsPage() {
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Hero */}
         <section className="mb-14 sm:mb-20 anim-fade-up">
           <div className="flex items-center gap-2 mb-4">
@@ -30,11 +30,11 @@ export default function ChantsPage() {
           </h2>
           <div className="divider-violet mb-1" />
           {[
-            { title: 'Mangala Sutta', dur: '8:45', desc: 'The Discourse on Blessings — protective chant' },
-            { title: 'Metta Sutta', dur: '6:30', desc: 'Loving-Kindness — universal compassion' },
-            { title: 'Ratana Sutta', dur: '7:15', desc: 'The Jewel Discourse — Triple Gem' },
+            { title: 'Mangala Sutta', dur: '8:45', desc: 'The Discourse on Blessings --- protective chant' },
+            { title: 'Metta Sutta', dur: '6:30', desc: 'Loving-Kindness --- universal compassion' },
+            { title: 'Ratana Sutta', dur: '7:15', desc: 'The Jewel Discourse --- Triple Gem' },
             { title: 'Karaniya Metta Sutta', dur: '5:50', desc: 'Extended loving-kindness meditation' },
-            { title: 'Dhammacakkappavattana Sutta', dur: '9:10', desc: 'The First Sermon — wheel of Dharma' },
+            { title: 'Dhammacakkappavattana Sutta', dur: '9:10', desc: 'The First Sermon --- wheel of Dharma' },
             { title: 'Parabhava Sutta', dur: '4:30', desc: 'Discourse on moral decline' },
           ].map((c, i, arr) => (
             <div key={c.title}>

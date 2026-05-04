@@ -3,8 +3,8 @@ import { getVillages } from '@/lib/content';
 import { MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Villages — Tai Khamyang Hub',
-  description: 'Directory of Tai Khamyang villages across Assam and Arunachal Pradesh — monasteries, population, and history.',
+  title: 'Villages --- Tai Khamyang Hub',
+  description: 'Directory of Tai Khamyang villages across Assam and Arunachal Pradesh --- monasteries, population, and history.',
 };
 
 export default async function VillagesPage() {
@@ -18,7 +18,7 @@ export default async function VillagesPage() {
 
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <section className="mb-10 sm:mb-14 anim-fade-up">
           <div className="flex items-center gap-2 mb-4">
             <div className="dot dot-green" />

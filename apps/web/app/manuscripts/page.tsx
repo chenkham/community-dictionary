@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Manuscripts — Tai Khamyang Hub',
+  title: 'Manuscripts --- Tai Khamyang Hub',
   description: 'Explore the sacred Tai Khamyang manuscripts written in Lik Tai script on bark, palm leaves, and handmade paper.',
 };
 
 export default function ManuscriptsPage() {
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Hero */}
         <section className="mb-14 sm:mb-20 anim-fade-up">
           <div className="flex items-center gap-2 mb-4">
@@ -37,7 +37,7 @@ export default function ManuscriptsPage() {
             'Transliteration and translation into Assamese and English',
             'Monastery source, village location, and preservation status',
             'Associated chant, ritual context, and historical notes',
-            'Material type — palm-leaf, handmade paper, or cloth',
+            'Material type --- palm-leaf, handmade paper, or cloth',
           ].map((item, i, arr) => (
             <div key={item}>
               <div className="py-2.5 text-sm text-[var(--text-muted)]">{item}</div>
@@ -52,14 +52,14 @@ export default function ManuscriptsPage() {
             <div className="absolute left-0 top-0.5 bottom-0.5 w-0.5 rounded-full bar-amber" />
             <h2 className="text-sm font-semibold mb-1">Preservation Context</h2>
             <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-              Early Khamyang Buddhism had Mahayana similarities, but through Burmese influence they adopted Theravada — the most ancient form practiced today. Manuscripts are written on palm leaves and handmade paper, stored in wooden chests inside monasteries.
+              Early Khamyang Buddhism had Mahayana similarities, but through Burmese influence they adopted Theravada --- the most ancient form practiced today. Manuscripts are written on palm leaves and handmade paper, stored in wooden chests inside monasteries.
             </p>
           </div>
           <div className="relative pl-4">
             <div className="absolute left-0 top-0.5 bottom-0.5 w-0.5 rounded-full bar-violet" />
             <h2 className="text-sm font-semibold mb-1">Pali Schools</h2>
             <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-              Established in association with Buddhist temples, Pali schools provide spiritual and religious instruction — safeguarding traditions and legacies for future generations.
+              Established in association with Buddhist temples, Pali schools provide spiritual and religious instruction --- safeguarding traditions and legacies for future generations.
             </p>
           </div>
         </section>
@@ -101,10 +101,10 @@ export default function ManuscriptsPage() {
           </div>
           <div className="divider-ocean mb-1" />
           {[
-            { title: 'Archiving 3 Endangered Languages — ThePrint', url: 'https://theprint.in/india/assam-archives-three-endangered-languages-as-lone-khamyang-speaker-battles-extinction/2832131/', desc: '650 manuscript leaves digitized, 250 cultural photographs' },
-            { title: 'Tai Khamyang Oral Literature — ELAR', url: 'https://www.elararchive.org/dk0298/', desc: 'Audio and video recordings of oral traditions' },
-            { title: 'Palm Leaf Manuscripts — British Library', url: 'https://blogs.bl.uk/asian-and-african/2015/01/the-beauty-of-palm-leaf-manuscripts-2-northern-thai-lao-and-shan-traditions.html', desc: 'Northern Thai, Lao, and Shan manuscript traditions' },
-            { title: 'Theravada Monasteries of Arunachal — Sahapedia', url: 'https://www.sahapedia.org/theravada-buddhist-monasteries-arunachal-pradesh-study-art-and-visual-culture', desc: 'Art and visual culture of related monasteries' },
+            { title: 'Archiving 3 Endangered Languages --- ThePrint', url: 'https://theprint.in/india/assam-archives-three-endangered-languages-as-lone-khamyang-speaker-battles-extinction/2832131/', desc: '650 manuscript leaves digitized, 250 cultural photographs' },
+            { title: 'Tai Khamyang Oral Literature --- ELAR', url: 'https://www.elararchive.org/dk0298/', desc: 'Audio and video recordings of oral traditions' },
+            { title: 'Palm Leaf Manuscripts --- British Library', url: 'https://blogs.bl.uk/asian-and-african/2015/01/the-beauty-of-palm-leaf-manuscripts-2-northern-thai-lao-and-shan-traditions.html', desc: 'Northern Thai, Lao, and Shan manuscript traditions' },
+            { title: 'Theravada Monasteries of Arunachal --- Sahapedia', url: 'https://www.sahapedia.org/theravada-buddhist-monasteries-arunachal-pradesh-study-art-and-visual-culture', desc: 'Art and visual culture of related monasteries' },
           ].map((link, i, arr) => (
             <div key={link.url}>
               <a href={link.url} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between py-2.5 px-1 row-hover rounded-md">

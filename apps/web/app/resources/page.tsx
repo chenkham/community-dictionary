@@ -1,37 +1,24 @@
-import type { Metadata } from 'next';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, BookOpen } from 'lucide-react';
+import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Resources — Tai Khamyang Hub',
-  description: 'Curated external links to learn more about the Tai Khamyang language, history, culture, and community.',
+export const metadata = {
+  title: 'Resources --- Tai Khamyang Hub',
+  description: 'Curated external links, language archives, Wikipedia articles, and academic papers about the Tai Khamyang community.',
 };
 
-const sections = [
+const resourceSections = [
   {
-    title: 'Wikipedia & Reference',
+    title: 'Wikipedia & Reference (Internal)',
     dot: 'dot-ocean',
     bar: 'bar-ocean',
     grad: 'g-ocean',
+    internal: true,
     links: [
-      { title: 'Khamyang People', url: 'https://en.wikipedia.org/wiki/Khamyang_people', source: 'Wikipedia', desc: 'History, culture, distribution, and festivals of the Tai Khamyang.' },
-      { title: 'Khamyang Language', url: 'https://en.wikipedia.org/wiki/Khamyang_language', source: 'Wikipedia', desc: 'Linguistics, ISO 639-3:ksu classification, speaker count.' },
-      { title: 'Tai Peoples', url: 'https://en.wikipedia.org/wiki/Tai_people', source: 'Wikipedia', desc: 'The broader Tai diaspora across Southeast and South Asia.' },
-      { title: 'Southwestern Tai Languages', url: 'https://en.wikipedia.org/wiki/Southwestern_Tai_languages', source: 'Wikipedia', desc: 'Language family tree — Khamyang, Khamti, Phake, Shan, Thai.' },
-      { title: 'Sangken Festival', url: 'https://en.wikipedia.org/wiki/Sangken', source: 'Wikipedia', desc: 'The traditional Tai New Year water festival (Poi Sangken).' },
-      { title: 'Ahom Kingdom', url: 'https://en.wikipedia.org/wiki/Ahom_kingdom', source: 'Wikipedia', desc: '600-year Tai kingdom in Assam — historical context.' },
-    ],
-  },
-  {
-    title: 'Cultural Documentation',
-    dot: 'dot-amber',
-    bar: 'bar-amber',
-    grad: 'g-amber',
-    links: [
-      { title: 'Tai Khamyang Community of Assam', url: 'https://www.sahapedia.org/tai-khamyang-community-assam', source: 'Sahapedia', desc: 'Comprehensive overview of migration, settlement, and identity.' },
-      { title: 'Society, Culture & Religion', url: 'https://www.sahapedia.org/tai-khamyang-community-assam-society-culture-and-religion', source: 'Sahapedia', desc: 'Detailed ethnography — monasteries, marriage, Gaon Sabha.' },
-      { title: 'History & Folk Traditions', url: 'https://www.sahapedia.org/tai-khamyangs-assam-history-and-folk-traditions', source: 'Sahapedia', desc: 'Oral histories, Khamyang Chronicle, migration narratives.' },
-      { title: 'Interview: Dr Narendra Nath Shyam', url: 'https://map.sahapedia.org/article/In-Conversation%20with%20Dr%20Narendra%20Nath%20Shyam', source: 'Sahapedia', desc: '"Tai Khamyang women share absolute equality with men."' },
-      { title: 'Theravada Monasteries of Arunachal', url: 'https://www.sahapedia.org/theravada-buddhist-monasteries-arunachal-pradesh-study-art-and-visual-culture', source: 'Sahapedia', desc: 'Art and visual culture of related Buddhist monasteries.' },
+      { title: 'Tai Khamyang People', url: '/article/Khamyang_people', source: 'Wikipedia', desc: 'History, culture, distribution, and festivals of the Tai Khamyang.' },
+      { title: 'Khamyang Language', url: '/article/Khamyang_language', source: 'Wikipedia', desc: 'Linguistics, ISO 639-3:ksu classification, speaker count.' },
+      { title: 'Tai Peoples', url: '/article/Tai_peoples', source: 'Wikipedia', desc: 'The broader Tai diaspora across Southeast and South Asia.' },
+      { title: 'Southwestern Tai Languages', url: '/article/Southwestern_Tai_languages', source: 'Wikipedia', desc: 'Language family tree --- Khamyang, Khamti, Phake, Shan, Thai.' },
+      { title: 'Sangken Festival', url: '/article/Sangken', source: 'Wikipedia', desc: 'The traditional Tai New Year water festival (Poi Sangken).' },
     ],
   },
   {
@@ -41,9 +28,7 @@ const sections = [
     grad: 'g-violet',
     links: [
       { title: 'Oral Literature Documentation', url: 'https://www.elararchive.org/dk0298/', source: 'ELAR', desc: 'Audio and video recordings of Tai Khamyang oral traditions.' },
-      { title: 'ELDP Project Highlight', url: 'https://elararchive.org/blog/2019/01/17/eldp-project-highlight-documentation-of-the-oral-literature-of-the-tai-khamyang-community-in-upper-assam-india/', source: 'ELAR Blog', desc: 'Palash Kumar Nath\'s field documentation project details.' },
-      { title: 'Archiving 3 Endangered Languages', url: 'https://theprint.in/india/assam-archives-three-endangered-languages-as-lone-khamyang-speaker-battles-extinction/2832131/', source: 'ThePrint', desc: '650 manuscript leaves digitized, 250 cultural photographs archived.' },
-      { title: 'Last Guardian of Khamyang', url: 'https://www.devdiscourse.com/article/entertainment/3776425-last-guardian-of-khamyang-digital-efforts-to-preserve-endangered-assamese-languages', source: 'DevDiscourse', desc: 'Bhogeswar Thomung — the sole proficient speaker at 84 years old.' },
+      { title: 'Last Guardian of Khamyang', url: 'https://www.devdiscourse.com/article/entertainment/3776425-last-guardian-of-khamyang-digital-efforts-to-preserve-endangered-assamese-languages', source: 'DevDiscourse', desc: 'Bhogeswar Thomung --- the sole proficient speaker at 84 years old.' },
       { title: 'Tai Languages: Endangered Status (PDF)', url: 'https://ijirl.com/wp-content/uploads/2025/04/TAI-LANGUAGES-IN-INDIA-THE-ENDANGERED-LANGUAGES-NEED-REVIVAL-AND-PROTECTION-OF-LAW.pdf', source: 'IJIRL', desc: 'Legal protection framework for Tai languages in India.' },
     ],
   },
@@ -54,81 +39,73 @@ const sections = [
     grad: 'g-jade',
     links: [
       { title: 'Tai Khamyang Heritage Society', url: 'https://www.taikhamyang.org/', source: 'Official', desc: 'The official community organization for conservation and upliftment.' },
-      { title: 'Rituals, Customs & Village Life', url: 'https://www.taikhamyang.org/copy-of-home', source: 'Heritage Society', desc: 'Gaon Sabha, social structure, and traditional governance.' },
       { title: 'Reviving Heritage, Strengthening Identity', url: 'https://arunachal.mygov.in/group-issue/reviving-heritage-strengthening-identity/', source: 'MyGov India', desc: 'Government initiative for Tai Khamyang heritage preservation.' },
-      { title: 'International Tai Youth Festival', url: 'https://assamtribune.com/assam/first-international-tai-youth-festival-strengthens-cross-border-cultural-bonds-1565671', source: 'Assam Tribune', desc: 'Cross-border cultural bonds with Thai, Myanmar, and Chinese Tai.' },
-    ],
-  },
-  {
-    title: 'Tourism & Buddhism',
-    dot: 'dot-rose',
-    bar: 'bar-rose',
-    grad: 'g-rose',
-    links: [
-      { title: 'Buddhism in Assam', url: 'https://assamtourism.gov.in/Buddhism.php', source: 'Assam Tourism', desc: 'Overview of all Theravada Buddhist communities in Assam.' },
-      { title: 'Buddhism in Assam (Government)', url: 'https://tourism.assam.gov.in/portlet-sub-innerpage/buddhism-in-assam-0', source: 'Govt. of Assam', desc: 'Historical context — from Mahayana decline to Theravada survival.' },
-      { title: 'Namphake Buddhist Village', url: 'https://travellingslacker.com/namphake-buddhist-monastery-village/', source: 'Travel Blog', desc: 'A related Tai Phake monastery village open to visitors.' },
-      { title: 'Poi Sangken 2025', url: 'https://bharatarticles.com/sangken-2025-a-vibrant-water-festival-celebrated-in-arunachal-pradesh-and-assam/', source: 'Bharat Articles', desc: 'Latest coverage of the vibrant water festival celebration.' },
-    ],
-  },
-  {
-    title: 'Food & Material Culture',
-    dot: 'dot-fire',
-    bar: 'bar-fire',
-    grad: 'g-fire',
-    links: [
-      { title: 'Tai Khamyang Cuisine', url: 'https://www.rumicooks.com/2018/09/tai-khamyang-cuisine.html', source: 'RumiCooks', desc: 'Khau Hou, Khaulam, fish dishes, bamboo cooking, and festival foods.' },
-      { title: 'Tribal Textiles of Assam', url: 'https://www.iiad.edu.in/the-circle/tribal-textiles-of-assam-cotton-silk-weaving-handlooms/', source: 'IIAD', desc: 'Mekhela Sador, Nungwat/Riha — traditional weaving and dress.' },
     ],
   },
 ];
 
 export default function ResourcesPage() {
   return (
-    <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
-        <section className="mb-14 sm:mb-20 anim-fade-up">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="dot dot-ocean" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">External Links</span>
+    <div className="relative min-h-screen pt-24 sm:pt-32 pb-20 w-full bg-white">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <section className="mb-16 sm:mb-24">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center shadow-sm border border-amber-100">
+              <BookOpen className="w-6 h-6" />
+            </div>
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-amber-700">Knowledge Base</span>
           </div>
-          <h1 className="font-heading text-2xl sm:text-4xl font-bold tracking-tight leading-[1.1] mb-4">
-            Resources &amp; <span className="g-text g-ocean">Learn More</span>
+          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6">
+            Resources & <span className="text-amber-600">Learn More</span>
           </h1>
-          <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-lg leading-relaxed">
-            Curated links to Wikipedia, Sahapedia, language archives, government portals, and community websites. Read from authoritative sources, explore further.
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl leading-relaxed">
+            Curated links to Wikipedia (readable natively), Sahapedia, language archives, government portals, and community websites.
           </p>
         </section>
 
-        {sections.map((section, si) => (
-          <section key={section.title} className={`mb-14 sm:mb-16 anim-fade-up anim-delay-${Math.min(si + 1, 5)}`}>
-            <div className="flex items-center gap-2 mb-3">
-              <div className={`dot ${section.dot}`} />
-              <h2 className="font-heading text-lg font-bold">{section.title}</h2>
-            </div>
-            <div className={`divider-${section.grad.replace('g-', '')} mb-1`} />
-            {section.links.map((link, li) => (
-              <div key={link.url}>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-start gap-3 py-3 px-1 row-hover rounded-md"
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-sm font-semibold group-hover:text-[#0077B6] transition-colors">{link.title}</span>
-                      <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--surface)] text-[var(--text-light)] shrink-0">{link.source}</span>
-                    </div>
-                    <p className="text-[13px] text-[var(--text-muted)] leading-relaxed">{link.desc}</p>
-                  </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-[var(--text-light)] shrink-0 mt-1 group-hover:text-[#0077B6] transition-colors" />
-                </a>
-                {li < section.links.length - 1 && <div className="divider" />}
+        <div className="space-y-16">
+          {resourceSections.map((section) => (
+            <div key={section.title} className="relative">
+              <div className="flex items-center gap-3 mb-8">
+                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900">{section.title}</h2>
               </div>
-            ))}
-          </section>
-        ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {section.links.map((link) => (
+                  <div key={link.title} className="group">
+                    {section.internal ? (
+                      <Link 
+                        href={link.url}
+                        className="flex flex-col h-full p-6 rounded-2xl bg-gray-50 hover:bg-amber-50 border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                      >
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <h3 className="font-bold text-lg text-gray-900 font-heading">{link.title}</h3>
+                          <span className="shrink-0 px-2.5 py-1 bg-white text-gray-500 text-[10px] font-bold uppercase tracking-widest rounded-full border border-gray-200 shadow-sm">{link.source}</span>
+                        </div>
+                        <p className="text-gray-600 leading-relaxed">{link.desc}</p>
+                      </Link>
+                    ) : (
+                      <a 
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col h-full p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 border border-gray-100 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                      >
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <h3 className="font-bold text-lg text-gray-900 font-heading">{link.title}</h3>
+                          <div className="flex items-center gap-2">
+                            <span className="shrink-0 px-2.5 py-1 bg-white text-gray-500 text-[10px] font-bold uppercase tracking-widest rounded-full border border-gray-200 shadow-sm">{link.source}</span>
+                            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-gray-900 transition-colors" />
+                          </div>
+                        </div>
+                        <p className="text-gray-600 leading-relaxed">{link.desc}</p>
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

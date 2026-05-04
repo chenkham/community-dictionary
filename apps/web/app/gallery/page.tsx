@@ -3,8 +3,8 @@ import { getGalleryItems } from '@/lib/content';
 import { Camera } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Gallery — Tai Khamyang Hub',
-  description: 'Photo gallery of Tai Khamyang culture — festivals, manuscripts, monasteries, traditional dress, and village life.',
+  title: 'Gallery --- Tai Khamyang Hub',
+  description: 'Photo gallery of Tai Khamyang culture --- festivals, manuscripts, monasteries, traditional dress, and village life.',
 };
 
 const categoryLabels: Record<string, { label: string; grad: string; dot: string }> = {
@@ -28,7 +28,7 @@ export default async function GalleryPage() {
 
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <section className="mb-10 sm:mb-14 anim-fade-up">
           <div className="flex items-center gap-2 mb-4">
             <div className="dot dot-rose" />
@@ -55,7 +55,7 @@ export default async function GalleryPage() {
                 <div key={item.id}>
                   <div className="py-3 px-1 row-hover rounded-md">
                     <div className="flex items-start gap-3">
-                      {/* Placeholder for image — shows icon when no image available */}
+                      {/* Placeholder for image --- shows icon when no image available */}
                       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-md bg-[var(--surface)] flex items-center justify-center shrink-0 overflow-hidden">
                         <Camera className="w-5 h-5 text-[var(--text-light)]" />
                       </div>

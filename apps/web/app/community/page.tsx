@@ -3,14 +3,14 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Community — Tai Khamyang Hub',
+  title: 'Community --- Tai Khamyang Hub',
   description: 'Meet the Tai Khamyang community: villages, notable people, and the living memory of a Theravada Buddhist community in Assam.',
 };
 
 export default function CommunityPage() {
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Hero */}
         <section className="mb-14 sm:mb-20 anim-fade-up">
           <div className="flex items-center gap-2 mb-4">
@@ -85,7 +85,7 @@ export default function CommunityPage() {
             <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-full bar-green" />
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--text-light)] mb-2">Community Voice</div>
             <blockquote className="font-heading text-base sm:text-lg italic leading-relaxed mb-2">
-              &ldquo;Language becomes stronger when people, place, and memory stay visible. Our villages are not just locations — they are living archives of who we are.&rdquo;
+              &ldquo;Language becomes stronger when people, place, and memory stay visible. Our villages are not just locations --- they are living archives of who we are.&rdquo;
             </blockquote>
           </div>
           <Link href="/about" className="inline-flex items-center gap-1.5 text-sm font-semibold g-text g-ocean group">

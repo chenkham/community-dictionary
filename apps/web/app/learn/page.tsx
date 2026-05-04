@@ -38,7 +38,7 @@ export default function LearnPage() {
 
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <section className="mb-10 sm:mb-14 anim-fade-up">
           <div className="flex items-center gap-2 mb-4">
             <div className="dot dot-jade" />
@@ -48,7 +48,7 @@ export default function LearnPage() {
             Learn Tai <span className="g-text g-jade">Khamyang</span>
           </h1>
           <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-lg leading-relaxed">
-            Start with basic words and phrases. The Khamyang language belongs to the Southwestern Tai family — related to Thai, Shan, and Khamti.
+            Start with basic words and phrases. The Khamyang language belongs to the Southwestern Tai family --- related to Thai, Shan, and Khamti.
           </p>
         </section>
 
@@ -102,7 +102,7 @@ export default function LearnPage() {
                   </div>
                   <div>
                     <div className="text-[10px] uppercase tracking-wider text-[var(--text-light)] mb-0.5 sm:hidden">Assamese</div>
-                    <span className="text-sm text-[var(--text-muted)]">{p.assamese || '—'}</span>
+                    <span className="text-sm text-[var(--text-muted)]">{p.assamese || '---'}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     {p.pronunciation && (
@@ -127,7 +127,7 @@ export default function LearnPage() {
         {/* External resource link */}
         <div className="divider-jade mt-8 mb-4" />
         <a href="https://www.elararchive.org/dk0298/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold g-text g-violet">
-          Listen to audio recordings at ELAR Archive →
+          Listen to audio recordings at ELAR Archive ---
         </a>
       </div>
     </div>

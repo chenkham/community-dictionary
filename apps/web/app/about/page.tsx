@@ -5,7 +5,7 @@ import { getTimeline } from '@/lib/content';
 import InteractiveTimeline from '@/components/InteractiveTimeline';
 
 export const metadata: Metadata = {
-  title: 'About — Tai Khamyang Hub',
+  title: 'About --- Tai Khamyang Hub',
   description: 'Learn about the Tai Khamyang community, their history, etymology, religion, and homeland in Northeast India.',
 };
 
@@ -13,7 +13,7 @@ export default async function AboutPage() {
   const timeline = await getTimeline();
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
-      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Hero */}
         <section className="mb-14 sm:mb-20 anim-fade-up">
           <div className="flex items-center gap-2 mb-4">
@@ -24,10 +24,10 @@ export default async function AboutPage() {
             About the <span className="g-text g-amber">Tai Khamyang</span>
           </h1>
           <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-lg leading-relaxed mb-2">
-            The Tai Khamyang — literally &ldquo;People Having Gold&rdquo; (Kham = gold, Yang = to have) — are one of six Tai groups that migrated from Mong-Mao in present-day Yunnan, China to the Brahmaputra valley of Northeast India.
+            The Tai Khamyang --- literally &ldquo;People Having Gold&rdquo; (Kham = gold, Yang = to have) --- are one of six Tai groups that migrated from Mong-Mao in present-day Yunnan, China to the Brahmaputra valley of Northeast India.
           </p>
           <p className="text-sm text-[var(--text-light)] max-w-lg leading-relaxed">
-            A small but culturally rich Theravada Buddhist community, the Khamyangs have preserved their distinct identity through centuries of change — maintaining sacred manuscripts, Buddhist monasteries, traditional weaving, and a deep commitment to community living.
+            A small but culturally rich Theravada Buddhist community, the Khamyangs have preserved their distinct identity through centuries of change --- maintaining sacred manuscripts, Buddhist monasteries, traditional weaving, and a deep commitment to community living.
           </p>
         </section>
 
@@ -37,7 +37,7 @@ export default async function AboutPage() {
             <div className="absolute left-0 top-0.5 bottom-0.5 w-0.5 rounded-full bar-amber" />
             <h2 className="text-sm font-semibold mb-1">Etymology</h2>
             <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-              The word <strong className="text-[var(--text)]">Khamyang</strong> comes from two Tai words: <strong className="g-text g-amber">Kham</strong> (gold) and <strong className="g-text g-amber">Yang</strong> (to have/possess). This translates to &ldquo;People Having Gold&rdquo; — a name reflecting their golden heritage.
+              The word <strong className="text-[var(--text)]">Khamyang</strong> comes from two Tai words: <strong className="g-text g-amber">Kham</strong> (gold) and <strong className="g-text g-amber">Yang</strong> (to have/possess). This translates to &ldquo;People Having Gold&rdquo; --- a name reflecting their golden heritage.
             </p>
           </div>
           <div className="relative pl-4">
@@ -93,7 +93,7 @@ export default async function AboutPage() {
           <div className="divider-ocean mb-1" />
           {[
             { name: 'Tai Ahom', pop: '~1.3M (assimilated)', note: 'Ruled the Ahom Kingdom for 600 years', highlight: false },
-            { name: 'Tai Khamyang', pop: '~7,000', note: '"People of Gold" — Theravada Buddhist', highlight: true },
+            { name: 'Tai Khamyang', pop: '~7,000', note: '"People of Gold" --- Theravada Buddhist', highlight: true },
             { name: 'Tai Khamti', pop: '~12,000', note: 'Largest Tai Buddhist group in NE India', highlight: false },
             { name: 'Tai Phake', pop: '~2,000', note: 'Closely related to Khamyang linguistically', highlight: false },
             { name: 'Tai Aiton', pop: '~2,500', note: 'Buddhist community in Golaghat district', highlight: false },
@@ -132,7 +132,7 @@ export default async function AboutPage() {
             <h2 className="font-heading text-lg font-bold mb-2">Geography &amp; Settlement</h2>
             <div className="space-y-2 text-sm text-[var(--text-muted)] leading-relaxed">
               <p>Concentrated in four districts of <strong className="text-[var(--text)]">Upper Assam</strong>: Jorhat, Sivasagar, Tinsukia, and Golaghat. Some families also live in Namsai, Arunachal Pradesh.</p>
-              <p>Their migration route: <strong className="text-[var(--text)]">Mong-Mao</strong> → <strong className="text-[var(--text)]">Patkai Hills</strong> → <strong className="text-[var(--text)]">Nong Yang Lake</strong> → Brahmaputra valley.</p>
+              <p>Their migration route: <strong className="text-[var(--text)]">Mong-Mao</strong> --- <strong className="text-[var(--text)]">Patkai Hills</strong> --- <strong className="text-[var(--text)]">Nong Yang Lake</strong> --- Brahmaputra valley.</p>
               <p>Villages are named with the suffix <strong className="text-[var(--text)]">&ldquo;Shyam Gaon&rdquo;</strong> and organized around a central <strong className="text-[var(--text)]">kyong</strong> (monastery).</p>
             </div>
           </div>
@@ -149,9 +149,9 @@ export default async function AboutPage() {
           </h2>
           <div className="divider-violet mb-1" />
           {[
-            { title: 'Khamyang People — Wikipedia', url: 'https://en.wikipedia.org/wiki/Khamyang_people', desc: 'History, etymology, distribution, and culture' },
-            { title: 'Tai Khamyang Community — Sahapedia', url: 'https://www.sahapedia.org/tai-khamyang-community-assam', desc: 'Comprehensive cultural documentation' },
-            { title: 'Society, Culture & Religion — Sahapedia', url: 'https://www.sahapedia.org/tai-khamyang-community-assam-society-culture-and-religion', desc: 'Detailed ethnography and social life' },
+            { title: 'Khamyang People --- Wikipedia', url: 'https://en.wikipedia.org/wiki/Khamyang_people', desc: 'History, etymology, distribution, and culture' },
+            { title: 'Tai Khamyang Community --- Sahapedia', url: 'https://www.sahapedia.org/tai-khamyang-community-assam', desc: 'Comprehensive cultural documentation' },
+            { title: 'Society, Culture & Religion --- Sahapedia', url: 'https://www.sahapedia.org/tai-khamyang-community-assam-society-culture-and-religion', desc: 'Detailed ethnography and social life' },
             { title: 'ELAR: Oral Literature Archive', url: 'https://www.elararchive.org/dk0298/', desc: 'Audio/video recordings of Tai Khamyang traditions' },
             { title: 'Tai Khamyang Heritage Society', url: 'https://www.taikhamyang.org/', desc: 'Official community organization' },
           ].map((link, i, arr) => (

@@ -42,7 +42,7 @@ export default function DictionaryPage() {
   const totalWords = allWords?.pagination?.total ?? words?.length ?? 0;
 
   return (
-    <main className="mx-auto w-full max-w-[90rem] px-4 pt-20 pb-10 sm:pt-24 sm:px-6">
+    <main className="mx-auto w-full max-w-7xl px-6 pt-24 pb-16 sm:pt-32 sm:px-8 lg:px-12">
       {/* Header */}
       <div className="mb-8 anim-fade-up">
         <div className="flex items-center gap-2 mb-4">
@@ -54,7 +54,7 @@ export default function DictionaryPage() {
           Tai Khamyang <span className="g-text g-jade">Dictionary</span>
         </h1>
         <p className="text-sm text-[var(--text-muted)] max-w-lg leading-relaxed mb-5">
-          Search across three languages — Tai Khamyang, English, and Assamese. Part of the Southwestern Tai language family.
+          Search across three languages --- Tai Khamyang, English, and Assamese. Part of the Southwestern Tai language family.
         </p>
 
         {/* Stats inline */}

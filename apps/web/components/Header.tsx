@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookHeart, ChevronDown, Heart, Menu, Moon, Plus, Sun, User, X } from 'lucide-react';
+import { ChevronDown, Heart, Menu, Plus, X } from 'lucide-react';
 import AddWordModal from './AddWordModal';
 
 const mainLinks = [
@@ -30,41 +30,17 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState(false);
   const [cultureOpen, setCultureOpen] = useState(false);
-  const [mobileCultureOpen, setMobileCultureOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const [dark, setDark] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const profileRef = useRef<HTMLDivElement>(null);
-  const mobileProfileRef = useRef<HTMLDivElement>(null);
 
-  const close = useCallback(() => { setOpen(false); setMobileCultureOpen(false); }, []);
-  useEffect(() => { close(); setCultureOpen(false); setProfileOpen(false); }, [pathname, close]);
+  const close = useCallback(() => { setOpen(false); }, []);
+  useEffect(() => { close(); setCultureOpen(false); }, [pathname, close]);
 
-  // Dark mode: init from localStorage + sync to html class
   useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = saved === 'dark' || (!saved && prefersDark);
-    setDark(isDark);
-    document.documentElement.classList.toggle('dark', isDark);
-  }, []);
-  const toggleDark = () => {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle('dark', next);
-    localStorage.setItem('theme', next ? 'dark' : 'light');
-  };
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [open]);
-
-  // Close dropdowns on outside click
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) setCultureOpen(false);
-      if (profileRef.current && !profileRef.current.contains(e.target as Node) && mobileProfileRef.current && !mobileProfileRef.current.contains(e.target as Node)) setProfileOpen(false);
-    }
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setCultureOpen(false);
+      }
+    };
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
@@ -73,13 +49,20 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-[var(--header-bg)] backdrop-blur-md border-b border-[var(--border)]">
-        <div className="mx-auto flex w-full max-w-[90rem] items-center justify-between px-4 py-2.5 sm:px-6 lg:px-12 xl:px-20">
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-7 h-7 rounded-md btn-ocean flex items-center justify-center">
-              <BookHeart className="w-3.5 h-3.5 text-white" />
+      <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-gray-100 transition-all duration-300">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
+          {/* Logo Section */}
+          <Link href="/" className="flex items-center gap-3 shrink-0 group">
+            {/* The user can replace /logo.png with the official Tai Khamyang logo in the public folder */}
+            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-tr from-amber-100 to-amber-50 flex items-center justify-center border border-amber-200 shadow-sm transition-transform group-hover:scale-105">
+              <img src="/logo.png" alt="Tai Khamyang Logo" className="w-8 h-8 object-contain z-10" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+              {/* Fallback styling if logo.png is not yet present */}
+              <span className="absolute text-amber-700 font-bold text-lg font-heading z-0">TK</span>
             </div>
-            <span className="font-heading text-sm font-bold tracking-wide text-[var(--text)]">TK Hub</span>
+            <div className="flex flex-col">
+              <span className="font-heading text-lg font-bold tracking-wide text-gray-900 leading-tight">Tai Khamyang</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-amber-600 font-semibold leading-tight">People of Gold</span>
+            </div>
           </Link>
 
           {/* Desktop nav */}
@@ -88,39 +71,38 @@ export default function Header() {
               <Link
                 key={l.href}
                 href={l.href}
-                className={`px-2.5 py-1.5 text-[13px] font-medium rounded-md transition-colors ${
+                className={`px-4 py-2 text-[15px] font-medium rounded-full transition-all duration-200 ${
                   isActive(pathname, l.href)
-                    ? 'text-[#0077B6] bg-[#0077B6]/5'
-                    : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-soft)]'
+                    ? 'text-amber-700 bg-amber-50 shadow-inner'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
                 {l.label}
               </Link>
             ))}
 
-            {/* Culture dropdown */}
+            {/* Culture Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
-                onClick={() => setCultureOpen((o) => !o)}
-                className={`flex items-center gap-1 px-2.5 py-1.5 text-[13px] font-medium rounded-md transition-colors ${
-                  isCultureActive
-                    ? 'text-[#0077B6] bg-[#0077B6]/5'
-                    : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-soft)]'
+                onClick={() => setCultureOpen(!cultureOpen)}
+                className={`flex items-center gap-1 px-4 py-2 text-[15px] font-medium rounded-full transition-all duration-200 ${
+                  isCultureActive || cultureOpen
+                    ? 'text-amber-700 bg-amber-50 shadow-inner'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
                 Culture
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${cultureOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${cultureOpen ? 'rotate-180' : ''}`} />
               </button>
+
               {cultureOpen && (
-                <div className="absolute top-full left-0 mt-1 w-44 bg-[var(--modal-bg)] rounded-lg border border-[var(--border)] shadow-lg shadow-black/5 py-1 z-50">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 rounded-2xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 py-2 overflow-hidden anim-fade-up">
                   {cultureLinks.map((l) => (
                     <Link
                       key={l.href}
                       href={l.href}
-                      className={`block px-3 py-2 text-[13px] font-medium transition-colors ${
-                        isActive(pathname, l.href)
-                          ? 'text-[#0077B6] bg-[#0077B6]/5'
-                          : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-soft)]'
+                      className={`block px-5 py-2.5 text-[15px] transition-colors ${
+                        isActive(pathname, l.href) ? 'text-amber-700 bg-amber-50/50 font-medium' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                       }`}
                     >
                       {l.label}
@@ -131,128 +113,55 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* Desktop right: theme toggle + profile dropdown */}
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
-            <button onClick={toggleDark} className="p-1.5 rounded-md text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-soft)] transition-colors" aria-label="Toggle theme">
-              {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
-
-            {/* Profile dropdown */}
-            <div className="relative" ref={profileRef}>
-              <button
-                onClick={() => setProfileOpen((o) => !o)}
-                className={`p-1.5 rounded-md transition-colors ${profileOpen ? 'text-[#0077B6] bg-[#0077B6]/5' : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-soft)]'}`}
-                aria-label="Profile menu"
-              >
-                <User className="w-4 h-4" />
-              </button>
-              {profileOpen && (
-                <div className="absolute top-full right-0 mt-1 w-48 bg-[var(--modal-bg)] rounded-lg border border-[var(--border)] shadow-lg shadow-black/5 py-1 z-50">
-                  <Link href="/profile" className="flex items-center gap-2 px-3 py-2 text-[13px] font-medium text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-soft)] transition-colors">
-                    <User className="w-3.5 h-3.5" /> Profile
-                  </Link>
-                  <Link href="/favorites" className="flex items-center gap-2 px-3 py-2 text-[13px] font-medium text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-soft)] transition-colors">
-                    <Heart className="w-3.5 h-3.5" /> Favorites
-                  </Link>
-                  <div className="my-1 border-t border-[var(--border)]" />
-                  <button
-                    onClick={() => { setModal(true); setProfileOpen(false); }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-[13px] font-semibold text-[#0077B6] hover:bg-[#0077B6]/5 transition-colors"
-                  >
-                    <Plus className="w-3.5 h-3.5" /> Contribute a Word
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Mobile: profile icon + hamburger */}
-          <div className="flex lg:hidden items-center gap-1">
-            <div className="relative" ref={mobileProfileRef}>
-              <button
-                onClick={() => setProfileOpen((o) => !o)}
-                className={`p-2 rounded-md transition-colors ${profileOpen ? 'text-[#0077B6]' : 'text-[var(--text-muted)]'} active:bg-[var(--bg-soft)]`}
-                aria-label="Profile menu"
-              >
-                <User className="w-5 h-5" />
-              </button>
-              {profileOpen && (
-                <div className="absolute top-full right-0 mt-1 w-48 bg-[var(--modal-bg)] rounded-lg border border-[var(--border)] shadow-lg shadow-black/5 py-1 z-50">
-                  <Link href="/profile" onClick={() => setProfileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 text-[14px] font-medium text-[var(--text-muted)] active:bg-[var(--bg-soft)] transition-colors">
-                    <User className="w-4 h-4" /> Profile
-                  </Link>
-                  <Link href="/favorites" onClick={() => setProfileOpen(false)} className="flex items-center gap-2 px-3 py-2.5 text-[14px] font-medium text-[var(--text-muted)] active:bg-[var(--bg-soft)] transition-colors">
-                    <Heart className="w-4 h-4" /> Favorites
-                  </Link>
-                  <div className="my-1 border-t border-[var(--border)]" />
-                  <button
-                    onClick={() => { setModal(true); setProfileOpen(false); }}
-                    className="w-full flex items-center gap-2 px-3 py-2.5 text-[14px] font-semibold text-[#0077B6] active:bg-[#0077B6]/5 transition-colors"
-                  >
-                    <Plus className="w-4 h-4" /> Contribute a Word
-                  </button>
-                </div>
-              )}
-            </div>
-            <button onClick={() => setOpen(o => !o)} className="p-2 rounded-md text-[var(--text-muted)] active:bg-[var(--bg-soft)]" aria-label="Menu">
-              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          {/* Actions */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link href="/favorites" className="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 hover:text-rose-500 hover:bg-rose-50 transition-colors">
+              <Heart className="w-5 h-5" />
+            </Link>
+            
+            <button
+              onClick={() => setModal(true)}
+              className="flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-medium shadow-md shadow-amber-600/20 transition-all hover:shadow-lg hover:shadow-amber-600/30 hover:-translate-y-0.5"
+            >
+              <Plus className="w-4 h-4" /> Contribute
             </button>
           </div>
+
+          {/* Mobile toggle */}
+          <button onClick={() => setOpen(!open)} className="lg:hidden p-2 -mr-2 text-gray-600">
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
 
-        {/* Mobile menu — nav links + dark mode only */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${open ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="border-t border-[var(--border)] bg-[var(--bg)] px-4 py-3 sm:px-6 space-y-0.5 overflow-y-auto max-h-[75vh]">
-            {mainLinks.map((l) => (
+        {/* Mobile menu */}
+        {open && (
+          <div className="lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-xl overflow-hidden py-4 px-6 flex flex-col gap-2 anim-fade-up">
+            {[...mainLinks, ...cultureLinks].map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                onClick={close}
-                className={`block px-3 py-2.5 text-[15px] font-medium rounded-md transition-colors active:bg-[var(--bg-soft)] ${
-                  isActive(pathname, l.href) ? 'text-[#0077B6]' : 'text-[var(--text-muted)]'
+                className={`py-3 px-4 text-base font-medium rounded-xl transition-colors ${
+                  isActive(pathname, l.href) ? 'text-amber-700 bg-amber-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
                 {l.label}
               </Link>
             ))}
-
-            {/* Mobile culture dropdown */}
+            <div className="h-px bg-gray-100 my-2" />
+            <Link href="/favorites" className="flex items-center gap-3 py-3 px-4 text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-colors">
+              <Heart className="w-5 h-5 text-rose-500" /> Favorites
+            </Link>
             <button
-              onClick={() => setMobileCultureOpen((o) => !o)}
-              className={`w-full flex items-center justify-between px-3 py-2.5 text-[15px] font-medium rounded-md transition-colors active:bg-[var(--bg-soft)] ${
-                isCultureActive ? 'text-[#0077B6]' : 'text-[var(--text-muted)]'
-              }`}
+              onClick={() => { setModal(true); close(); }}
+              className="flex items-center justify-center gap-2 py-3 mt-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 text-white font-medium shadow-md"
             >
-              Culture
-              <ChevronDown className={`w-4 h-4 transition-transform ${mobileCultureOpen ? 'rotate-180' : ''}`} />
-            </button>
-            <div className={`overflow-hidden transition-all duration-200 ${mobileCultureOpen ? 'max-h-80' : 'max-h-0'}`}>
-              <div className="pl-4 space-y-0.5 pb-1">
-                {cultureLinks.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    onClick={close}
-                    className={`block px-3 py-2 text-[14px] font-medium rounded-md transition-colors active:bg-[var(--bg-soft)] ${
-                      isActive(pathname, l.href) ? 'text-[#0077B6]' : 'text-[var(--text-muted)]'
-                    }`}
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="divider my-2" />
-            <button onClick={toggleDark} className="w-full flex items-center gap-2.5 px-3 py-2.5 text-[15px] font-medium rounded-md text-[var(--text-muted)] active:bg-[var(--bg-soft)] transition-colors">
-              {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              {dark ? 'Light Mode' : 'Dark Mode'}
+              <Plus className="w-5 h-5" /> Contribute Word
             </button>
           </div>
-        </div>
+        )}
       </header>
 
-      <AddWordModal isOpen={modal} onClose={() => setModal(false)} />
+      {modal && <AddWordModal isOpen={modal} onClose={() => setModal(false)} />}
     </>
   );
 }
