@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #F0F7F4;
+  --bg-soft: #E6F2EC;
+  --surface: #FFFFFF;
+  --text: #0F2027;
+  --text-muted: #44606C;
+  --text-light: #8AA3AC;
+  --border: #D7E4DD;
+  --border-strong: #B8CFC4;
+  --header-bg: rgba(240, 247, 244, 0.85);
+  --brand-primary: #0891B2;
+  --brand-secondary: #059669;
+  --brand-deep: #0F766E;
+  --danger: #DC2626;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text);
+  min-height: 100dvh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* === Background — same green/blue/white tone as the public site === */
+.bg-brush {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 50% at 0% 0%, rgba(8, 145, 178, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 100% 30%, rgba(5, 150, 105, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 50% at 50% 100%, rgba(15, 118, 110, 0.07) 0%, transparent 60%),
+    linear-gradient(180deg, #F0F7F4 0%, #FFFFFF 50%, #EAF4EE 100%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-brush::before {
+  content: '';
+  position: absolute;
+  top: -10%; left: -10%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(8, 145, 178, 0.12) 0%, transparent 60%);
+  filter: blur(80px);
+}
+
+.bg-brush::after {
+  content: '';
+  position: absolute;
+  bottom: -10%; right: -10%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(5, 150, 105, 0.10) 0%, transparent 60%);
+  filter: blur(90px);
+}
+
+/* === Gradient text & buttons === */
+.g-text { -webkit-background-clip: text; background-clip: text; color: transparent; }
+.g-ocean { background-image: linear-gradient(135deg, #0891B2, #0F766E); }
+.g-jade  { background-image: linear-gradient(135deg, #059669, #0891B2); }
+.g-fire  { background-image: linear-gradient(135deg, #DC2626, #B91C1C); }
+
+.btn-ocean { background-image: linear-gradient(135deg, #0891B2, #0E7490); transition: all .2s; color: #fff; }
+.btn-ocean:hover:not(:disabled) { background-image: linear-gradient(135deg, #0E7490, #155E75); }
+.btn-jade  { background-image: linear-gradient(135deg, #059669, #047857); transition: all .2s; color: #fff; }
+.btn-jade:hover:not(:disabled)  { background-image: linear-gradient(135deg, #047857, #065F46); }
+.btn-danger { background-image: linear-gradient(135deg, #DC2626, #B91C1C); transition: all .2s; color: #fff; }
+.btn-danger:hover:not(:disabled) { background-image: linear-gradient(135deg, #B91C1C, #991B1B); }
+.btn-ocean:disabled, .btn-jade:disabled, .btn-danger:disabled { opacity: .55; cursor: not-allowed; }
+
+/* === Form fields === */
+.field {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  padding: 0.7rem 0.95rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: border-color .15s, box-shadow .15s;
+  outline: none;
+}
+.field:hover { border-color: var(--border-strong); }
+.field:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.12);
+}
+.field::placeholder { color: var(--text-light); }
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.field-hint {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+}
+.field-error {
+  font-size: 0.78rem;
+  color: var(--danger);
+  margin-top: 0.3rem;
+}
+
+/* === Cards === */
+.card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 20px -8px rgba(15, 32, 39, 0.08);
+}
+
+/* === Dividers / dots === */
+.divider { height: 1px; background: var(--border); }
+.divider-ocean { height: 1px; background: linear-gradient(90deg, transparent, #0891B2, transparent); opacity: .55; }
+.dot { width: 6px; height: 6px; border-radius: 999px; }
+.dot-ocean { background: #0891B2; }
+.dot-jade  { background: #059669; }
+.dot-fire  { background: #DC2626; }
+
+/* === Row hover === */
+.row-hover { transition: background-color .15s ease; }
+.row-hover:hover { background: rgba(8, 145, 178, 0.05); }
+
+/* === Skeleton === */
+.skeleton {
+  display: block;
+  background: linear-gradient(90deg, #E6EFEA 25%, #F2F7F4 50%, #E6EFEA 75%);
+  background-size: 200% 100%;
+  animation: skel 1.4s ease infinite;
+  border-radius: 4px;
+}
+@keyframes skel { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* === Animations === */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+.anim-fade-up { animation: fadeUp .5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-delay-1 { animation-delay: .08s; }
+.anim-delay-2 { animation-delay: .16s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === Toast === */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.7rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,.25);
+  animation: toastIn .25s ease;
+}
+.toast-success { background: #059669; color: #fff; }
+.toast-error   { background: #DC2626; color: #fff; }
+.toast-info    { background: #0F766E; color: #fff; }
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
