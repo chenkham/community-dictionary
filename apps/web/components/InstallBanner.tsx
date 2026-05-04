@@ -9,44 +9,30 @@ export default function InstallBanner() {
   const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
-    // Detect iOS
     const userAgent = window.navigator.userAgent.toLowerCase();
     const isIosDevice = /iphone|ipad|ipod/.test(userAgent);
-    
-    // Check if app is already installed
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
                          (window.navigator as any).standalone;
 
-    if (isStandalone) {
-      return; // Already installed, do nothing
-    }
+    if (isStandalone) return;
 
     if (isIosDevice) {
-      setIsIOS(true);
-      setShowBanner(true);
+      const isSafari = /safari/.test(userAgent) && !/crios|fxios/.test(userAgent);
+      if (isSafari) {
+        setIsIOS(true);
+        setShowBanner(true);
+      }
+      return;
     }
 
     const handler = (e: Event) => {
-      console.log('beforeinstallprompt fired!');
       e.preventDefault();
       setDeferredPrompt(e);
       setShowBanner(true);
     };
 
     window.addEventListener('beforeinstallprompt', handler);
-    
-    // Fallback for testing: if we aren't in standalone mode, show banner after 2 seconds
-    // just so you can see it and verify it's working. We can remove this later.
-    const timer = setTimeout(() => {
-      if (!isStandalone) {
-        setShowBanner(true);
-      }
-    }, 2000);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handler);
-      clearTimeout(timer);
-    };
+    return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
   const handleInstallClick = async () => {
