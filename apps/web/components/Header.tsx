@@ -27,6 +27,49 @@ function isActive(pathname: string, href?: string, dropdown?: any[]) {
   return false;
 }
 
+function MobileDropdown({ label, dropdown, pathname, close }: { label: string, dropdown: any[], pathname: string, close: () => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <div className="flex flex-col py-1">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center justify-between px-4 py-3 text-[15px] font-medium text-white/90 hover:text-white transition-colors text-left"
+      >
+        <span className={isActive(pathname, undefined, dropdown) ? "border-b border-white pb-1 text-white" : ""}>
+          {label}
+        </span>
+        <svg 
+          className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {isOpen && (
+        <div className="flex flex-col gap-1 bg-black/10 rounded-lg mx-2 mb-2 p-1">
+          {dropdown.map((d) => (
+            <Link
+              key={d.href}
+              href={d.href}
+              onClick={close}
+              className={`py-2 px-6 text-[14px] font-medium transition-colors ${
+                isActive(pathname, d.href)
+                  ? 'text-white border-l-2 border-white pl-5'
+                  : 'text-white/70 hover:text-white'
+              }`}
+            >
+              {d.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -124,37 +167,29 @@ export default function Header() {
             {mainLinks.map((l) => {
               if (l.dropdown) {
                 return (
-                  <div key={l.label} className="flex flex-col gap-1 py-1">
-                    <div className="px-4 py-2 text-[15px] font-semibold text-white/90 border-b border-white/10 uppercase tracking-wider text-xs mt-2 mb-1">
-                      {l.label}
-                    </div>
-                    {l.dropdown.map((d) => (
-                      <Link
-                        key={d.href}
-                        href={d.href}
-                        className={`py-3 px-6 text-[15px] font-medium rounded-xl transition-colors ${
-                          isActive(pathname, d.href)
-                            ? 'bg-white/15 text-white'
-                            : 'text-white/85 hover:bg-white/10 hover:text-white'
-                        }`}
-                      >
-                        {d.label}
-                      </Link>
-                    ))}
-                  </div>
+                  <MobileDropdown 
+                    key={l.label} 
+                    label={l.label} 
+                    dropdown={l.dropdown} 
+                    pathname={pathname} 
+                    close={close} 
+                  />
                 );
               }
               return (
                 <Link
                   key={l.href}
                   href={l.href as string}
-                  className={`py-3 px-4 text-[15px] font-medium rounded-xl transition-colors ${
+                  onClick={close}
+                  className={`py-3 px-4 text-[15px] font-medium transition-colors flex ${
                     isActive(pathname, l.href)
-                      ? 'bg-white/15 text-white'
-                      : 'text-white/85 hover:bg-white/10 hover:text-white'
+                      ? 'text-white'
+                      : 'text-white/85 hover:text-white'
                   }`}
                 >
-                  {l.label}
+                  <span className={isActive(pathname, l.href) ? "border-b border-white pb-0.5" : ""}>
+                    {l.label}
+                  </span>
                 </Link>
               );
             })}

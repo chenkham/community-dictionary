@@ -14,33 +14,21 @@ export default async function AboutPage() {
   return (
     <div className="relative min-h-screen pt-20 sm:pt-28 pb-12 w-full">
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Hero with side image */}
         <section className="mb-14 sm:mb-20 anim-fade-up">
-          <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
-            <div className="sm:col-span-8">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="dot dot-ocean" />
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Our Story</span>
-              </div>
-              <h1 className="font-heading text-2xl sm:text-4xl font-bold tracking-tight leading-[1.1] mb-4">
-                About the <span className="g-text g-ocean">Tai Khamyang</span>
-              </h1>
-              <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-lg leading-relaxed mb-2">
-                The Tai Khamyang — literally &ldquo;People Having Gold&rdquo; (<em>Kham</em> = gold, <em>Yang</em> = to have) — are one of six Tai groups that migrated from Mong-Mao in present-day Yunnan, China to the Brahmaputra valley of Northeast India.
-              </p>
-              <p className="text-sm text-[var(--text-light)] max-w-lg leading-relaxed">
-                A small but culturally rich Theravada Buddhist community, the Khamyangs have preserved their distinct identity through centuries of change — maintaining sacred manuscripts, Buddhist monasteries, traditional weaving, and a deep commitment to community living.
-              </p>
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="dot dot-ocean" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Our Story</span>
             </div>
-            <div className="sm:col-span-4">
-              <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/5] sm:aspect-square">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Golden_pagoda%2C_namsai.jpg/800px-Golden_pagoda%2C_namsai.jpg"
-                  alt="Golden Pagoda — Northeast Indian Theravada heritage"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+            <h1 className="font-heading text-2xl sm:text-4xl font-bold tracking-tight leading-[1.1] mb-4">
+              About the <span className="g-text g-ocean">Tai Khamyang</span>
+            </h1>
+            <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed mb-2">
+              The Tai Khamyang — literally &ldquo;People Having Gold&rdquo; (<em>Kham</em> = gold, <em>Yang</em> = to have) — are one of six Tai groups that migrated from Mong-Mao in present-day Yunnan, China to the Brahmaputra valley of Northeast India.
+            </p>
+            <p className="text-sm text-[var(--text-light)] leading-relaxed">
+              A small but culturally rich Theravada Buddhist community, the Khamyangs have preserved their distinct identity through centuries of change — maintaining sacred manuscripts, Buddhist monasteries, traditional weaving, and a deep commitment to community living.
+            </p>
           </div>
         </section>
 
@@ -140,25 +128,14 @@ export default async function AboutPage() {
 
         {/* Geography & Settlement */}
         <section className="mb-14 sm:mb-20 anim-fade-up anim-delay-5">
-          <div className="grid grid-cols-1 sm:grid-cols-12 gap-6">
-            <div className="sm:col-span-8">
-              <div className="relative pl-4">
-                <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-full bar-green" />
-                <h2 className="font-heading text-lg font-bold mb-2">Geography &amp; Settlement</h2>
-                <div className="space-y-2 text-sm text-[var(--text-muted)] leading-relaxed">
-                  <p>Concentrated in four districts of <strong className="text-[var(--text)]">Upper Assam</strong>: Jorhat, Sivasagar, Tinsukia, and Golaghat. Some families also live in Namsai, Arunachal Pradesh.</p>
-                  <p>Their migration route: <strong className="text-[var(--text)]">Mong-Mao</strong> → <strong className="text-[var(--text)]">Patkai Hills</strong> → <strong className="text-[var(--text)]">Nong Yang Lake</strong> → Brahmaputra valley.</p>
-                  <p>Villages are named with the suffix <strong className="text-[var(--text)]">&ldquo;Shyam Gaon&rdquo;</strong> and organized around a central <strong className="text-[var(--text)]">kyong</strong> (monastery).</p>
-                </div>
-              </div>
-            </div>
-            <div className="sm:col-span-4">
-              <div className="rounded-xl overflow-hidden shadow-md aspect-square">
-                <img
-                  src="https://images.unsplash.com/photo-1545048702-79362596cdc9?auto=format&fit=crop&q=80&w=600"
-                  alt="Brahmaputra valley landscape"
-                  className="w-full h-full object-cover"
-                />
+          <div className="max-w-3xl">
+            <div className="relative pl-4">
+              <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-full bar-green" />
+              <h2 className="font-heading text-lg font-bold mb-2">Geography &amp; Settlement</h2>
+              <div className="space-y-2 text-sm text-[var(--text-muted)] leading-relaxed">
+                <p>Concentrated in four districts of <strong className="text-[var(--text)]">Upper Assam</strong>: Jorhat, Sivasagar, Tinsukia, and Golaghat. Some families also live in Namsai, Arunachal Pradesh.</p>
+                <p>Their migration route: <strong className="text-[var(--text)]">Mong-Mao</strong> → <strong className="text-[var(--text)]">Patkai Hills</strong> → <strong className="text-[var(--text)]">Nong Yang Lake</strong> → Brahmaputra valley.</p>
+                <p>Villages are named with the suffix <strong className="text-[var(--text)]">&ldquo;Shyam Gaon&rdquo;</strong> and organized around a central <strong className="text-[var(--text)]">kyong</strong> (monastery).</p>
               </div>
             </div>
           </div>
