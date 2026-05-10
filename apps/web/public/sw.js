@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tk-hub-v1';
+const CACHE_NAME = 'tk-hub-v2';
 const STATIC_ASSETS = ['/', '/dictionary', '/about', '/manuscripts', '/chants', '/traditions', '/festivals', '/community'];
 
 self.addEventListener('install', (event) => {

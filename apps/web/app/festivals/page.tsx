@@ -40,11 +40,18 @@ export default function FestivalsPage() {
               </div>
               <p className="text-[11px] text-[var(--text-light)]">Poi Sangken — April 14–16 — Water festival across all monasteries</p>
             </div>
-            <div className="sm:col-span-4">
-              <div className="rounded-2xl overflow-hidden shadow-md aspect-[4/5] sm:aspect-square">
+            <div className="sm:col-span-4 flex flex-col gap-6">
+              <div className="rounded-2xl overflow-hidden shadow-md aspect-[4/3] sm:aspect-square">
                 <img
-                  src="https://images.unsplash.com/photo-1583912267550-d6c2ac3196c0?auto=format&fit=crop&q=80&w=800"
-                  alt="Water festival celebration"
+                  src="/images/3.jpg"
+                  alt="Night festival celebration"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-md aspect-[4/3] sm:aspect-square">
+                <img
+                  src="/images/4.jpg"
+                  alt="Day festival celebration"
                   className="w-full h-full object-cover"
                 />
               </div>

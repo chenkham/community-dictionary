@@ -1,22 +1,49 @@
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import WordOfTheDay from '@/components/WordOfTheDay';
-import HeroCarousel from '@/components/HeroCarousel';
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen pt-20 sm:pt-28 pb-20 w-full">
-      {/* === Hero Carousel === */}
-      <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 mb-16 sm:mb-24">
-        <HeroCarousel />
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link href="/dictionary" className="px-7 py-3 rounded-full btn-ocean text-white font-semibold text-sm shadow-md">
-            Explore Dictionary
-          </Link>
-          <Link href="/about" className="px-7 py-3 rounded-full border border-[var(--border-strong)] text-[var(--text)] hover:bg-white/60 font-semibold text-sm transition-all">
-            Our Story
-          </Link>
+    <div className="relative min-h-screen pb-20 w-full">
+      {/* === Full Screen Hero Image === */}
+      <section className="relative w-full h-[85vh] min-h-[500px] mb-16 sm:mb-24">
+        <img 
+          src="/images/1.jpg" 
+          alt="Tai Khamyang Community" 
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 mt-16">
+          <h1 className="text-white text-5xl sm:text-6xl md:text-7xl font-bold font-heading mb-6 tracking-tight drop-shadow-lg">
+            Tai Khamyang
+          </h1>
+          <p className="text-white/90 text-lg sm:text-2xl max-w-2xl font-light drop-shadow-md">
+            People of Gold. A vibrant Theravada Buddhist community from Upper Assam, preserving our ancient language, culture, and faith.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Link href="/dictionary" className="px-8 py-4 rounded-full bg-[#0891B2] text-white font-semibold text-sm shadow-md hover:bg-[#0E7490] transition-colors">
+              Explore Dictionary
+            </Link>
+            <Link href="/about" className="px-8 py-4 rounded-full border border-white text-white hover:bg-white/20 font-semibold text-sm transition-all backdrop-blur-sm">
+              Our Story
+            </Link>
+          </div>
         </div>
+      </section>
+
+      {/* === Who We Are === */}
+      <section className="w-full max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 mb-20 text-center">
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="dot dot-amber" />
+          <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Who We Are</span>
+          <div className="dot dot-amber" />
+        </div>
+        <h2 className="font-heading text-2xl sm:text-4xl font-bold text-[var(--text)] mb-6">
+          The <span className="g-text g-amber">Tai Khamyang</span> People
+        </h2>
+        <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed italic">
+          "The Tai Khamyangs, also known as Shyam, are an indigenous Tai community residing primarily in the Tinsukia, Jorhat, Sivasagar, and Golaghat districts of Assam, as well as parts of Arunachal Pradesh. With a rich heritage rooted in Theravada Buddhism, we are committed to preserving our ancient language, vibrant culture, and harmonious way of life."
+        </p>
       </section>
 
       {/* === Word of the Day === */}
@@ -66,12 +93,12 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Side image — a small monastery photo, not too large */}
+          {/* Side image — 2nd image (monastery) */}
           <div className="lg:col-span-5 order-first lg:order-last">
             <div className="sticky top-28 rounded-[1.5rem] overflow-hidden shadow-xl relative h-[260px] sm:h-[320px] lg:h-[440px]">
               <img
-                src="https://images.unsplash.com/photo-1545048702-79362596cdc9?auto=format&fit=crop&q=80&w=1000"
-                alt="Theravada monastery in upper Assam"
+                src="/images/2.jpg"
+                alt="Tai Khamyang village monastery"
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F2027]/70 via-transparent to-transparent" />
@@ -85,16 +112,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === Living Tradition quote with small portrait image === */}
+      {/* === Living Tradition text (photo removed as requested) === */}
       <section className="w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start py-10">
-          <div className="w-24 h-24 sm:w-32 sm:h-32 shrink-0 rounded-2xl overflow-hidden shadow-lg ring-2 ring-white">
-            <img
-              src="https://images.unsplash.com/photo-1530432914937-1ad9c1d2f76a?auto=format&fit=crop&q=80&w=400"
-              alt="Buddhist elder"
-              className="w-full h-full object-cover"
-            />
-          </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <div className="dot dot-jade" />
