@@ -1,8 +1,4 @@
-// Full CRUD API client for the Tai Khamyang Dictionary backend (Hono + Supabase).
-// Mirrors the endpoints exposed at apps/api/src/routes/words.ts
-
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import { supabase } from './supabase';
 
 export interface Word {
   id: string;
@@ -41,62 +37,98 @@ export interface CreateWordInput {
 
 export type UpdateWordInput = Partial<CreateWordInput>;
 
-// ---------- helpers ----------
-
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(init?.headers || {}),
-    },
-    ...init,
-  });
-
-  let body: any = null;
-  try {
-    body = await res.json();
-  } catch {
-    /* body may be empty */
-  }
-
-  if (!res.ok) {
-    const msg =
-      body?.details ||
-      body?.error ||
-      body?.message ||
-      `Request failed (${res.status})`;
-    throw new Error(msg);
-  }
-  return body as T;
-}
-
 // ---------- endpoints ----------
 
-export function listWords(params: {
+export async function listWords(params: {
   page?: number;
   limit?: number;
   language?: 'tai' | 'en' | 'as';
 } = {}): Promise<PaginatedWords> {
-  const qs = new URLSearchParams();
-  if (params.page) qs.set('page', String(params.page));
-  if (params.limit) qs.set('limit', String(params.limit));
-  if (params.language) qs.set('language', params.language);
-  const suffix = qs.toString() ? `?${qs}` : '';
-  return request<PaginatedWords>(`/api/words${suffix}`);
+  const page = params.page || 1;
+  const limit = params.limit || 100;
+  const offset = (page - 1) * limit;
+
+  let queryBuilder = supabase
+    .from('words')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (params.language) {
+    const langField =
+      params.language === 'tai'
+        ? 'tai_khamyang_word'
+        : params.language === 'en'
+        ? 'english_word'
+        : 'assamese_word';
+    queryBuilder = queryBuilder.not(langField, 'is', null);
+  }
+
+  const { data, error, count } = await queryBuilder;
+
+  if (error) {
+    throw new Error(`Failed to fetch words: ${error.message}`);
+  }
+
+  const totalPages = count ? Math.ceil(count / limit) : 0;
+
+  return {
+    data: data as Word[],
+    pagination: {
+      page,
+      limit,
+      total: count || 0,
+      totalPages,
+    },
+  };
 }
 
-export function searchWords(q: string): Promise<SearchResponse> {
-  return request<SearchResponse>(
-    `/api/words/search?q=${encodeURIComponent(q)}`,
-  );
+export async function searchWords(query: string): Promise<SearchResponse> {
+  const { data, error } = await supabase.rpc('search_words', {
+    search_query: query,
+  });
+
+  if (error) {
+    console.error('RPC search failed, falling back to local search:', error.message);
+    const { data: fallbackData, error: fallbackError } = await supabase
+      .from('words')
+      .select('*')
+      .or(`tai_khamyang_word.ilike.%${query}%,english_word.ilike.%${query}%,assamese_word.ilike.%${query}%`)
+      .limit(50);
+      
+    if (fallbackError) {
+      throw new Error(`Failed to search words: ${fallbackError.message}`);
+    }
+    
+    return {
+      query,
+      results: fallbackData as Word[],
+      count: fallbackData.length,
+    };
+  }
+
+  return {
+    query,
+    results: (data || []) as Word[],
+    count: (data || []).length,
+  };
 }
 
-export function getWord(id: string): Promise<Word> {
-  return request<Word>(`/api/words/${id}`);
+export async function getWord(id: string): Promise<Word> {
+  const { data, error } = await supabase
+    .from('words')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to fetch word: ${error.message}`);
+  }
+
+  return data as Word;
 }
 
-export function createWord(input: CreateWordInput): Promise<Word> {
-  // strip empty optional fields so backend zod accepts them
+export async function createWord(input: CreateWordInput): Promise<Word> {
   const payload: CreateWordInput = {
     tai_khamyang_word: input.tai_khamyang_word.trim(),
     english_word: input.english_word.trim(),
@@ -108,26 +140,49 @@ export function createWord(input: CreateWordInput): Promise<Word> {
   if (input.audio_url && input.audio_url.trim()) {
     payload.audio_url = input.audio_url.trim();
   }
-  return request<Word>('/api/words', {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
+
+  const { data, error } = await supabase
+    .from('words')
+    .insert([payload])
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to create word: ${error.message}`);
+  }
+
+  return data as Word;
 }
 
-export function updateWord(
+export async function updateWord(
   id: string,
   input: UpdateWordInput,
 ): Promise<Word> {
-  return request<Word>(`/api/words/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(input),
-  });
+  const { data, error } = await supabase
+    .from('words')
+    .update(input)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to update word: ${error.message}`);
+  }
+
+  return data as Word;
 }
 
-export function deleteWord(id: string): Promise<{ message: string; id: string }> {
-  return request(`/api/words/${id}`, { method: 'DELETE' });
+export async function deleteWord(id: string): Promise<{ message: string; id: string }> {
+  const { error } = await supabase.from('words').delete().eq('id', id);
+  if (error) {
+    throw new Error(`Failed to delete word: ${error.message}`);
+  }
+  return { message: 'Deleted successfully', id };
 }
 
 export async function getApiHealth(): Promise<{ status: string; uptime: number }> {
-  return request('/api/health');
+  // Simple check to Supabase
+  const { error } = await supabase.from('words').select('id').limit(1);
+  if (error) throw new Error('Supabase unreachable');
+  return { status: 'ok', uptime: 100 };
 }
