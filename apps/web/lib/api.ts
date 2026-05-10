@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import { supabase } from './supabase';
 
 export interface Word {
   id: string;
@@ -32,28 +32,91 @@ export async function getWords(params: {
   limit?: number;
   language?: 'tai' | 'en' | 'as';
 }): Promise<PaginatedResponse> {
-  const searchParams = new URLSearchParams();
-  if (params.page) searchParams.set('page', params.page.toString());
-  if (params.limit) searchParams.set('limit', params.limit.toString());
-  if (params.language) searchParams.set('language', params.language);
+  const page = params.page || 1;
+  const limit = params.limit || 100;
+  const offset = (page - 1) * limit;
 
-  const response = await fetch(`${API_URL}/api/words?${searchParams}`);
-  if (!response.ok) throw new Error('Failed to fetch words');
-  return response.json();
+  let queryBuilder = supabase
+    .from('words')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (params.language) {
+    const langField =
+      params.language === 'tai'
+        ? 'tai_khamyang_word'
+        : params.language === 'en'
+        ? 'english_word'
+        : 'assamese_word';
+    queryBuilder = queryBuilder.not(langField, 'is', null);
+  }
+
+  const { data, error, count } = await queryBuilder;
+
+  if (error) {
+    throw new Error(`Failed to fetch words: ${error.message}`);
+  }
+
+  const totalPages = count ? Math.ceil(count / limit) : 0;
+
+  return {
+    data: data as Word[],
+    pagination: {
+      page,
+      limit,
+      total: count || 0,
+      totalPages,
+    },
+  };
 }
 
 export async function searchWords(query: string): Promise<SearchResponse> {
-  const response = await fetch(
-    `${API_URL}/api/words/search?q=${encodeURIComponent(query)}`
-  );
-  if (!response.ok) throw new Error('Failed to search words');
-  return response.json();
+  // Try calling the custom RPC if it exists
+  const { data, error } = await supabase.rpc('search_words', {
+    search_query: query,
+  });
+
+  if (error) {
+    console.error('RPC search failed, falling back to local search:', error.message);
+    
+    // Fallback: simple text search
+    const { data: fallbackData, error: fallbackError } = await supabase
+      .from('words')
+      .select('*')
+      .or(`tai_khamyang_word.ilike.%${query}%,english_word.ilike.%${query}%,assamese_word.ilike.%${query}%`)
+      .limit(50);
+      
+    if (fallbackError) {
+      throw new Error(`Failed to search words: ${fallbackError.message}`);
+    }
+    
+    return {
+      query,
+      results: fallbackData as Word[],
+      count: fallbackData.length,
+    };
+  }
+
+  return {
+    query,
+    results: (data || []) as Word[],
+    count: (data || []).length,
+  };
 }
 
 export async function getWord(id: string): Promise<Word> {
-  const response = await fetch(`${API_URL}/api/words/${id}`);
-  if (!response.ok) throw new Error('Failed to fetch word');
-  return response.json();
+  const { data, error } = await supabase
+    .from('words')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    throw new Error(`Failed to fetch word: ${error.message}`);
+  }
+
+  return data as Word;
 }
 
 export async function getWordById(id: string): Promise<Word> {
