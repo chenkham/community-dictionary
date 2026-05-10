@@ -154,10 +154,6 @@ export default function DictionaryPage() {
         <WordOfTheDay />
       </section>
 
-      <div className="divider-jade mt-10 mb-4" />
-      <Link href="/learn" className="inline-flex items-center gap-1.5 text-sm font-semibold g-text g-ocean">
-        Continue to phrases & numbers <ArrowRight className="w-3.5 h-3.5 text-[#0891B2]" />
-      </Link>
     </main>
   );
 }

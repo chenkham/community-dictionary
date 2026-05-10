@@ -13,7 +13,6 @@ const mainLinks = [
     dropdown: [
       { href: '/festivals', label: 'Festivals' },
       { href: '/cuisine', label: 'Cuisine' },
-      { href: '/learn', label: 'Learn' },
       { href: '/resources', label: 'Resources' },
     ]
   },
@@ -49,7 +48,7 @@ function MobileDropdown({ label, dropdown, pathname, close }: { label: string, d
         </svg>
       </button>
       {isOpen && (
-        <div className="flex flex-col gap-1 bg-black/10 rounded-lg mx-2 mb-2 p-1">
+        <div className="flex flex-col gap-1 mx-2 mb-2 p-1">
           {dropdown.map((d) => (
             <Link
               key={d.href}
